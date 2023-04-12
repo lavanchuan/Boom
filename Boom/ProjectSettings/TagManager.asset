@@ -16,6 +16,7 @@ TagManager:
   - DatBom
   - StandDirect
   - BinhNuoc
+  - UseKim
   layers:
   - Default
   - TransparentFX

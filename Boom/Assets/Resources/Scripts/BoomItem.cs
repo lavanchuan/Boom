@@ -4,24 +4,14 @@ using UnityEngine;
 
 public class BoomItem : MonoBehaviour
 {
-    ArrayList entities;
+    int quantity = 1;
 
-    private void Awake() {
-        SetupEntities();
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        foreach(string entity in entities){
-            if(other.tag == entity){
-                Destroy(gameObject);
-                break;
-            }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "Player" && !other.GetComponent<Player>().GetChoked()){
+            other.GetComponent<Player>().IncreaseBoomItem(quantity);
+            Destroy(gameObject);
         }
     }
 
-    void SetupEntities(){
-        entities = new ArrayList();
-        entities.Add("Player");
-
-    }
 }

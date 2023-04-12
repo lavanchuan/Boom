@@ -5,14 +5,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    bool choked; // sặc nước
     float speed;
     public static float MAX_SPEED = 6;
+    float lastSpeed; // speed hien tai - phuc hoi khi dung kim
     public int direct;
     const int LEFT = 1;
     const int RIGHT = 2;
     const int UP = 3;
     const int DOWN = 4;
     const int NONE = 0;
+    bool canKickBoom = false; // Đá boom
+    float timeLiveInWater;
+    const float TIME_LIVE_IN_WATER_DEFAULT = 3; // 3s
 
     // item
     GameObject bom;
@@ -21,15 +26,25 @@ public class Player : MonoBehaviour
     int bomQuantity = 1;
     string bomName;
     int sizeBom = 1;
+    int kimQuantity = 0;
+
+    // COMPONENT
+    Animator animator;
 
     // Constructor
     private void Awake() {
+        animator = GetComponent<Animator>();
+        this.choked = false;
+        this.timeLiveInWater = TIME_LIVE_IN_WATER_DEFAULT;
         bomName = Bom.bom1;
         speed = 3;
     }
-
     private void Update()
     {
+        // load animation
+        animator.SetBool("choked", choked);
+
+        // move with direct
         switch (direct)
         {
             case LEFT:
@@ -101,12 +116,9 @@ public class Player : MonoBehaviour
         return DOWN;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "BoomItem")
-        {
-            bomQuantity++;
-        }
+    // Boom Item
+    public void IncreaseBoomItem(int quantity){
+        this.bomQuantity += quantity;
     }
 
     // Dat bom
@@ -180,6 +192,63 @@ public class Player : MonoBehaviour
     public void SetMaxSpeed(){
         if(this.speed != MAX_SPEED){
             this.speed = MAX_SPEED;
+        }
+    }
+
+    // To kick boom
+    public void setCanKickBoom(bool kick){
+        this.canKickBoom = kick;
+    }
+
+    public bool getCanKickBoom(){
+        return this.canKickBoom;
+    }
+
+    // Choke water
+    public void SetChoked(bool choked){
+        this.choked = choked;
+    }
+
+    public bool GetChoked(){
+        return this.choked;
+    }
+
+    // State choke water
+    public void StateChoke(int speed){
+        this.lastSpeed = this.speed;
+        this.speed = speed;
+        StartCoroutine(LiveInWater()); // Chạy thời gian sống trong nước :v
+    }
+
+    public void RecoverAfterChoke(){
+        this.choked = false;
+        this.speed = lastSpeed;
+        Debug.Log("lastSpeed" + lastSpeed);
+        Debug.Log("speed" + speed);
+    }
+
+    // Kim
+    public void IncreaseKimQuantity(int quantity){
+        this.kimQuantity += quantity;
+    }
+
+    public void DecreaseKimQuantity(int quantity){
+        this.kimQuantity -= quantity;
+    }
+
+    public void UseKim(){
+        if(choked && kimQuantity > 0){
+            this.kimQuantity--;
+            RecoverAfterChoke();
+        }
+    }
+
+    // Choked and time(die or living for time)
+    IEnumerator LiveInWater(){
+        yield return new WaitForSeconds(timeLiveInWater);
+        if(this.choked){
+            Debug.Log("PLAYER ... DIE");
+            Destroy(gameObject);
         }
     }
 }
