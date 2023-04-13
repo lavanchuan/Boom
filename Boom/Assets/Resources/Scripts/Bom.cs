@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class Bom : MonoBehaviour
     public static string bom1 = "Bom";
     public int size;
     public static int MAX_SIZE = 6;
+    public string tagEffects;
 
     // component
     BoxCollider2D boxCollider2d;
@@ -133,6 +135,7 @@ public class Bom : MonoBehaviour
 
         // damage
         yield return new WaitForSeconds(0.1f);
+        RestoreBoomQuantity(tagEffects);
         Destroy(gameObject);
     }
 
@@ -151,6 +154,15 @@ public class Bom : MonoBehaviour
             if(other.contacts[0].normal.y > 0){
                 this.direct = GameDefine.DIRECT.UP;
             }
+        }
+    }
+
+    // Restore Boom Quantity
+    void RestoreBoomQuantity(string tag){
+        if(tag == "Player"){
+            try{
+                GameObject.FindGameObjectWithTag(tag).GetComponent<Player>().IncreaseBoomItem(1);
+            } catch (Exception e){}
         }
     }
 }

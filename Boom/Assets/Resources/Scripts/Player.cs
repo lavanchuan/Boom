@@ -7,7 +7,8 @@ public class Player : MonoBehaviour
 {
     bool choked; // sặc nước
     float speed;
-    public static float MAX_SPEED = 6;
+    public static float MAX_SPEED = 6f;
+    public static float SPEED_DEFAULT = 3f;
     float lastSpeed; // speed hien tai - phuc hoi khi dung kim
     public int direct;
     const int LEFT = 1;
@@ -17,13 +18,14 @@ public class Player : MonoBehaviour
     const int NONE = 0;
     bool canKickBoom = false; // Đá boom
     float timeLiveInWater;
-    const float TIME_LIVE_IN_WATER_DEFAULT = 3; // 3s
+    const float TIME_LIVE_IN_WATER_DEFAULT = 5f; // 5s
 
     // item
     GameObject bom;
 
     // item info
     int bomQuantity = 1;
+    const int MAX_BOOM_QUANTITY = 15;
     string bomName;
     int sizeBom = 1;
     int kimQuantity = 0;
@@ -37,12 +39,13 @@ public class Player : MonoBehaviour
         this.choked = false;
         this.timeLiveInWater = TIME_LIVE_IN_WATER_DEFAULT;
         bomName = Bom.bom1;
-        speed = 3;
+        speed = SPEED_DEFAULT;
     }
     private void Update()
     {
         // load animation
         animator.SetBool("choked", choked);
+        animator.SetBool("isVisible", isVisible);
 
         // move with direct
         switch (direct)
@@ -124,7 +127,7 @@ public class Player : MonoBehaviour
     // Dat bom
     public void DatBom()
     {
-        if(bomQuantity > 0){
+        if(!choked && bomQuantity > 0){
             bomQuantity--;
             CreateBom();
         }
@@ -165,6 +168,7 @@ public class Player : MonoBehaviour
         bom = (GameObject) Instantiate(Resources.Load("Prefabs/" + bomName));
         bom.transform.position = transform.position;
         bom.GetComponent<Bom>().size = sizeBom;
+        bom.GetComponent<Bom>().tagEffects = this.gameObject.tag;
     }
 
     // set size boom
@@ -172,6 +176,13 @@ public class Player : MonoBehaviour
         this.sizeBom += size;
         if(this.sizeBom > Bom.MAX_SIZE){
             this.sizeBom = Bom.MAX_SIZE;
+        }
+    }
+
+    public void DecreaseSizeBoom(int size){
+        this.sizeBom -= size;
+        if(this.sizeBom < 1){
+            this.sizeBom = 1;
         }
     }
 
@@ -186,6 +197,13 @@ public class Player : MonoBehaviour
         this.speed += speed;
         if(this.speed > speed){
             this.speed = MAX_SPEED;
+        }
+    }
+
+    public void DecreaseSpeed(float speed){
+        this.speed -= speed;
+        if(this.speed < SPEED_DEFAULT){
+            this.speed = SPEED_DEFAULT;
         }
     }
 
@@ -217,6 +235,7 @@ public class Player : MonoBehaviour
     public void StateChoke(int speed){
         this.lastSpeed = this.speed;
         this.speed = speed;
+        this.isVisible = false; // Stop visible -- Bị phát hiện và dừng tàng hình
         StartCoroutine(LiveInWater()); // Chạy thời gian sống trong nước :v
     }
 
@@ -250,6 +269,75 @@ public class Player : MonoBehaviour
             Debug.Log("PLAYER ... DIE");
             Destroy(gameObject);
         }
+    }
+
+    // Violet Demoniac Mask
+    public void StateContratyDirectByVioletDemoniacMask(float effectTime){
+        if(this.speed > 0) this.speed *= -1;
+        StartCoroutine(ContratyDirectByVioletDemoniacMask(effectTime));
+    }
+
+    IEnumerator ContratyDirectByVioletDemoniacMask(float effectTime){
+        yield return new WaitForSeconds(effectTime);
+        if(this.speed < 0) this.speed *= -1;
+    }
+
+    bool autoPutBoom = false;
+    public void StaetAutoPutBoomByVioletDemoniacMask(float effectTime, float deltaTimePut){
+        autoPutBoom = true;
+        StartCoroutine(AutoPutBoom(deltaTimePut));
+        StartCoroutine(AutoPutBoomByVioletDemoniacMask(effectTime));
+    }
+
+    IEnumerator AutoPutBoomByVioletDemoniacMask(float effectTime){
+        yield return new WaitForSeconds(effectTime);
+        if(this.autoPutBoom){
+            autoPutBoom = false;
+        }
+    }
+
+    IEnumerator AutoPutBoom(float deltaTimePut){
+        while(autoPutBoom){
+            DatBom();
+            yield return new WaitForSeconds(deltaTimePut);
+        }
+    }
+
+    // Visible Overcoat
+    bool isVisible = false;
+    float zForVisible = -10;
+    public void StateVisibleByVisibleOverCoat(float effectTime){
+        isVisible = true;
+        StartCoroutine(Visible(effectTime));
+    }
+
+    IEnumerator Visible(float effectTime){
+        yield return new WaitForSeconds(effectTime);
+        if(isVisible){
+            isVisible = false;
+        }
+    }
+
+    public bool GetVisible(){return this.isVisible;}
+
+    // Super Shield
+    int lastSizeBoom;
+    int lastBoomQuantity;
+    public void StateSuperShield(float effectTime){
+        this.lastSpeed = this.speed;
+        this.lastSizeBoom = this.sizeBom;
+        this.lastBoomQuantity = this.bomQuantity;
+        this.speed = MAX_SPEED;
+        this.sizeBom = Bom.MAX_SIZE;
+        this.bomQuantity = MAX_BOOM_QUANTITY;
+        StartCoroutine(SuperShield(effectTime));
+    }
+
+    IEnumerator SuperShield(float effectTime){
+        yield return new WaitForSeconds(effectTime);
+        this.speed = this.lastSpeed;
+        this.sizeBom = this.lastSizeBoom;
+        this.bomQuantity = this.lastBoomQuantity;
     }
 }
 
