@@ -43,9 +43,13 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        // show info
+        Debug.Log("Shield Quantity: " + this.shieldQuantity);
+
         // load animation
         animator.SetBool("choked", choked);
         animator.SetBool("isVisible", isVisible);
+        animator.SetBool("isUseShield", shieldUsing);
 
         // move with direct
         switch (direct)
@@ -191,6 +195,8 @@ public class Player : MonoBehaviour
             this.sizeBom = Bom.MAX_SIZE;
         }
     }
+
+    public int GetBoomSize(){return this.sizeBom;}
 
     // speed
     public void IncreaseSpeed(float speed){
@@ -339,5 +345,58 @@ public class Player : MonoBehaviour
         this.sizeBom = this.lastSizeBoom;
         this.bomQuantity = this.lastBoomQuantity;
     }
+
+    // Shield
+    int shieldQuantity = 0;
+    bool shieldUsing = false;
+    public void IncreaseShieldQuantity(int quantity){
+        this.shieldQuantity += quantity;
+    }
+
+    public void DecreaseShieldQuantity(int quantity){
+        this.shieldQuantity -= quantity;
+        if(this.shieldQuantity < 0) this.shieldQuantity = 0;
+    }
+
+    public int GetShieldQuantity(){return this.shieldQuantity;}
+
+    public bool GetShieldUsing(){return this.shieldUsing;}
+
+    public void UseShield(){
+        if(this.shieldQuantity > 0){
+            this.shieldQuantity--;
+            shieldUsing = true;
+            StartCoroutine(ShieldEffect(Shield.effectTime));
+        }
+    }
+
+    IEnumerator ShieldEffect(float effectTime){
+        yield return new WaitForSeconds(effectTime);
+        shieldUsing = false;
+    }
+
+    // Radar
+    int radarQuantity = 0;
+    bool isUseRadar = false;
+    public void IncreaseRadarQuantity(int quantity){this.radarQuantity += quantity;}
+    public void DecreaseRadarQuantity(int quantity){
+        this.radarQuantity -= quantity;
+        if(this.radarQuantity < 0){this.radarQuantity = 0;}
+    }
+    public int GetRadarQuantity(){return this.radarQuantity;}
+    public bool GetIsUseRadar(){return this.isUseRadar;}
+    public void UseRadar(){
+        if(!isUseRadar && GetRadarQuantity() > 0){
+            Debug.Log("Use Radar");
+            DecreaseRadarQuantity(1);
+            this.isUseRadar = true;
+            StartCoroutine(RadarEffect(Radar.effectTime));
+        }
+    }
+    IEnumerator RadarEffect(float effectTime){
+        yield return new WaitForSeconds(effectTime);
+        this.isUseRadar = false;
+    }
+    
 }
 

@@ -31,6 +31,12 @@ public class Bom : MonoBehaviour
 
     private void Update() {
         currentPos = transform.localPosition; // [update]
+        try{
+            GameObject go = GameObject.FindGameObjectWithTag(tagEffects);
+            if(tagEffects == "Player" && go.GetComponent<Player>().GetIsUseRadar()){
+                ViewRadar(go);
+            }
+        } catch(Exception e){}
     }
 
     private void FixedUpdate() {
@@ -164,5 +170,47 @@ public class Bom : MonoBehaviour
                 GameObject.FindGameObjectWithTag(tag).GetComponent<Player>().IncreaseBoomItem(1);
             } catch (Exception e){}
         }
+    }
+
+    // ViewRadar(GameObject go)
+    void ViewRadar(GameObject go){
+        if(go.tag == "Player"){
+            Player player = go.GetComponent<Player>();
+            Vector3 pos = transform.position;
+            pos.z = Radar.z;
+            int size = player.GetBoomSize();
+            int i;
+            // left
+            for (i = 1; i <= size; i++)
+            {
+                GameObject dtemp = CreateRadarPoint();
+                dtemp.transform.position = new Vector3(pos.x - i * transform.localScale.x, pos.y, pos.z);
+            }
+            // right
+            for (i = 1; i <= size; i++)
+            {
+                GameObject dtemp = CreateRadarPoint();
+                dtemp.transform.position = new Vector3(pos.x + i * transform.localScale.x, pos.y, pos.z);
+            }
+            // top
+            for (i = 1; i <= size; i++)
+            {
+                GameObject dtemp = CreateRadarPoint();
+                dtemp.transform.position = new Vector3(pos.x, pos.y + i * transform.localScale.y, pos.z);
+            }
+            // bottom
+            for (i = 1; i <= size; i++)
+            {
+                GameObject dtemp = CreateRadarPoint();
+                dtemp.transform.position = new Vector3(pos.x, pos.y - i * transform.localScale.y, pos.z);
+            }
+        }
+    }
+
+    // Create Radar Point
+    GameObject CreateRadarPoint(){
+        GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/ItemUse/EnviromentAuto/RadarPoint"));
+        dtemp.GetComponent<RadarPoint>().effectTime = timer - 0.5f;
+        return dtemp;
     }
 }
