@@ -1,3 +1,4 @@
+using System;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,7 +51,9 @@ public class ControlPlayer : MonoBehaviour
 
     void SetDirectPlayer(GameDefine.DIRECT direct)
     {
-        player.GetComponent<Player>().SetDirect(direct);
+        try{
+            player.GetComponent<Player>().SetDirect(direct);
+        } catch(Exception e){}
     }
 
 

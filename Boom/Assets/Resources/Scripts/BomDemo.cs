@@ -18,7 +18,7 @@ public class BomDemo : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(DateTime.Now + ": " + direct);
+        // Debug.Log(DateTime.Now + ": " + direct);
     }
 
     private void FixedUpdate()

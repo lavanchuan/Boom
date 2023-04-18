@@ -17,6 +17,7 @@ TagManager:
   - StandDirect
   - BinhNuoc
   - UseKim
+  - Boss1
   layers:
   - Default
   - TransparentFX

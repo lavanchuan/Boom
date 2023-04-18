@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         // show info
-        Debug.Log("Shield Quantity: " + this.shieldQuantity);
+        // Debug.Log("Shield Quantity: " + this.shieldQuantity);
 
         // load animation
         animator.SetBool("choked", choked);
@@ -170,7 +170,8 @@ public class Player : MonoBehaviour
     // Set Boom
     public void CreateBom(){
         bom = (GameObject) Instantiate(Resources.Load("Prefabs/" + bomName));
-        bom.transform.position = transform.position;
+        bom.transform.localPosition = new Vector2(transform.localPosition.x,
+            transform.localPosition.y - bom.transform.localScale.y/2);
         bom.GetComponent<Bom>().size = sizeBom;
         bom.GetComponent<Bom>().tagEffects = this.gameObject.tag;
     }
@@ -248,8 +249,8 @@ public class Player : MonoBehaviour
     public void RecoverAfterChoke(){
         this.choked = false;
         this.speed = lastSpeed;
-        Debug.Log("lastSpeed" + lastSpeed);
-        Debug.Log("speed" + speed);
+        // Debug.Log("lastSpeed" + lastSpeed);
+        // Debug.Log("speed" + speed);
     }
 
     // Kim
@@ -387,7 +388,7 @@ public class Player : MonoBehaviour
     public bool GetIsUseRadar(){return this.isUseRadar;}
     public void UseRadar(){
         if(!isUseRadar && GetRadarQuantity() > 0){
-            Debug.Log("Use Radar");
+            // Debug.Log("Use Radar");
             DecreaseRadarQuantity(1);
             this.isUseRadar = true;
             StartCoroutine(RadarEffect(Radar.effectTime));

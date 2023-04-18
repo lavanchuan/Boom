@@ -18,11 +18,17 @@ public class Damage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Player"){
-            if(!other.GetComponent<Player>().GetChoked()){
+            if(!other.GetComponent<Player>().GetChoked() 
+            && !other.GetComponent<Player>().GetShieldUsing()){
                 other.GetComponent<Player>().SetChoked(choked);
                 other.GetComponent<Player>().StateChoke(speed);
             }
-            return;
+        }
+
+        if(other.tag == "Block"){
+            Destroy(other.gameObject);
         }
     }
+
+    
 }

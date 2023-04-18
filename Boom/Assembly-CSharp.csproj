@@ -40,19 +40,24 @@
      <Compile Include="Assets\Resources\Scripts\Player.cs" />
      <Compile Include="Assets\Resources\Scripts\DatBom.cs" />
      <Compile Include="Assets\Resources\Scripts\Boom.cs" />
+     <Compile Include="Assets\Resources\Scripts\DK\ShieldJoystick.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\BinhNuoc.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\GreenDemoniacMask.cs" />
+     <Compile Include="Assets\Resources\Scripts\Item\Shield.cs" />
      <Compile Include="Assets\Resources\Scripts\ControlPlayer.cs" />
      <Compile Include="Assets\Resources\Scripts\Item.cs" />
+     <Compile Include="Assets\Resources\Scripts\DK\RadarJoystick.cs" />
      <Compile Include="Assets\Resources\Scripts\BomDemo.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\Kim.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\RedDemoniacMask.cs" />
      <Compile Include="Assets\Resources\Scripts\BoomItem.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\GiayVang.cs" />
+     <Compile Include="Assets\Resources\Scripts\Item\Radar.cs" />
      <Compile Include="Assets\Resources\Scripts\TouchCheck.cs" />
      <Compile Include="Assets\Resources\Scripts\DK.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\GiayDo.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\BongGai.cs" />
+     <Compile Include="Assets\Resources\Scripts\test.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\VisibleOvercoat.cs" />
      <Compile Include="Assets\Resources\Scripts\Damage.cs" />
      <Compile Include="Assets\Resources\Scripts\DK\UseKim.cs" />
@@ -60,13 +65,10 @@
      <Compile Include="Assets\Resources\Scripts\Bom.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\VioletDemoniacMask.cs" />
      <Compile Include="Assets\Resources\Scripts\GameDefine.cs" />
-     <Compile Include="Assets\Resources\Scripts\Item\GiayXanh.cs" />
-     <Compile Include="Assets\Resources\Scripts\Item\Shield.cs" />
-     <Compile Include="Assets\Resources\Scripts\DK\ShieldJoystick.cs" />
-     <Compile Include="Assets\Resources\Scripts\Item\Radar.cs" />
-     <Compile Include="Assets\Resources\Scripts\DK\RadarJoystick.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\RadarPoint.cs" />
-     <Compile Include="Assets\Resources\Scripts\test.cs" />
+     <Compile Include="Assets\Resources\Scripts\Item\GiayXanh.cs" />
+     <Compile Include="Assets\Resources\Scripts\Boss\BossAttribute.cs" />
+     <Compile Include="Assets\Resources\Scripts\Boss\Boss1\Boss1.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Unity\Hud\Editor\2020.3.45f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

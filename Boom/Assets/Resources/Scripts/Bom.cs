@@ -12,7 +12,7 @@ public class Bom : MonoBehaviour
     public string tagEffects;
 
     // component
-    BoxCollider2D boxCollider2d;
+    CircleCollider2D circleCollider2D;
     
     // Setup when player exit bom
     int speed = 0;
@@ -25,7 +25,7 @@ public class Bom : MonoBehaviour
     {
         currentPos = new Vector2(transform.position.x, transform.position.y);
         direct = GameDefine.DIRECT.NONE;
-        boxCollider2d = GetComponent<BoxCollider2D>();
+        circleCollider2D = GetComponent<CircleCollider2D>();
         Boom();
     }
 
@@ -62,12 +62,12 @@ public class Bom : MonoBehaviour
     // Player di chuyển ra khỏi quả bam đang đặt sẽ đặt trạng thái quả bom thành block
     private void OnTriggerExit2D(Collider2D other) {
         if(other.tag == "Player"){
-            boxCollider2d.isTrigger = false;
+            circleCollider2D.isTrigger = false;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        // Debug.Log(this.gameObject.GetComponent<BoxCollider2D>().enabled);
+        // Debug.Log(this.gameObject.GetComponent<CircleCollider2D>().enabled);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -109,34 +109,35 @@ public class Bom : MonoBehaviour
         yield return new WaitForSeconds(time - 1);
         // damage
         GameObject damage;
-        Vector3 pos = transform.position;
+        Vector2 pos = transform.localPosition;
+        pos.y = pos.y + transform.localScale.y/2;
         int i;
         // center
         damage = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
-        damage.transform.position = transform.position;
+        damage.transform.localPosition = pos;
         // left
         for (i = 1; i <= size; i++)
         {
             GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
-            dtemp.transform.position = new Vector3(pos.x - i * transform.localScale.x, pos.y, pos.z);
+            dtemp.transform.localPosition = new Vector2(pos.x - i * transform.localScale.x, pos.y);
         }
         // right
         for (i = 1; i <= size; i++)
         {
             GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
-            dtemp.transform.position = new Vector3(pos.x + i * transform.localScale.x, pos.y, pos.z);
+            dtemp.transform.localPosition = new Vector2(pos.x + i * transform.localScale.x, pos.y);
         }
         // top
         for (i = 1; i <= size; i++)
         {
             GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
-            dtemp.transform.position = new Vector3(pos.x, pos.y + i * transform.localScale.y, pos.z);
+            dtemp.transform.localPosition = new Vector2(pos.x, pos.y + i * transform.localScale.y);
         }
         // bottom
         for (i = 1; i <= size; i++)
         {
             GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
-            dtemp.transform.position = new Vector3(pos.x, pos.y - i * transform.localScale.y, pos.z);
+            dtemp.transform.localPosition = new Vector2(pos.x, pos.y - i * transform.localScale.y);
         }
 
         // damage
@@ -176,33 +177,36 @@ public class Bom : MonoBehaviour
     void ViewRadar(GameObject go){
         if(go.tag == "Player"){
             Player player = go.GetComponent<Player>();
-            Vector3 pos = transform.position;
-            pos.z = Radar.z;
+            Vector2 pos = transform.localPosition;
+            pos.y = pos.y + transform.localScale.y/2;
             int size = player.GetBoomSize();
             int i;
+            // center
+            GameObject temp = CreateRadarPoint();
+            temp.transform.localPosition = pos;
             // left
             for (i = 1; i <= size; i++)
             {
                 GameObject dtemp = CreateRadarPoint();
-                dtemp.transform.position = new Vector3(pos.x - i * transform.localScale.x, pos.y, pos.z);
+                dtemp.transform.localPosition = new Vector2(pos.x - i * transform.localScale.x, pos.y);
             }
             // right
             for (i = 1; i <= size; i++)
             {
                 GameObject dtemp = CreateRadarPoint();
-                dtemp.transform.position = new Vector3(pos.x + i * transform.localScale.x, pos.y, pos.z);
+                dtemp.transform.localPosition = new Vector2(pos.x + i * transform.localScale.x, pos.y);
             }
             // top
             for (i = 1; i <= size; i++)
             {
                 GameObject dtemp = CreateRadarPoint();
-                dtemp.transform.position = new Vector3(pos.x, pos.y + i * transform.localScale.y, pos.z);
+                dtemp.transform.localPosition = new Vector2(pos.x, pos.y + i * transform.localScale.y);
             }
             // bottom
             for (i = 1; i <= size; i++)
             {
                 GameObject dtemp = CreateRadarPoint();
-                dtemp.transform.position = new Vector3(pos.x, pos.y - i * transform.localScale.y, pos.z);
+                dtemp.transform.localPosition = new Vector2(pos.x, pos.y - i * transform.localScale.y);
             }
         }
     }

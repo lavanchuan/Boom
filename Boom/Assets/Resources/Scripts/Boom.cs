@@ -8,11 +8,11 @@ public class Boom : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("Di vao");
+        // Debug.Log("Di vao");
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        Debug.Log("Roi khoi");
+        // Debug.Log("Roi khoi");
         GetComponent<BoxCollider2D>().enabled = true;
     }
 }
