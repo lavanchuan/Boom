@@ -10,5 +10,9 @@ public class GameDefine : MonoBehaviour
     public static readonly int UP = 2;
     public static readonly int RIGHT = 3;
     public static readonly int LEFT = 4;
+    public static readonly float X_MIN = -11f; // -10
+    public static readonly float X_MAX = 10f; // 9
+    public static readonly float Y_MIN = -5; // -5
+    public static readonly float Y_MAX = 5f; // 4
 
 }

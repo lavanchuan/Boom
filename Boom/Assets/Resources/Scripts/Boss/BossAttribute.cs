@@ -1,3 +1,4 @@
+// using System.Reflection.Metadata;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,9 +21,22 @@ public class BossAttribute : MonoBehaviour
     float minDeltaTimeAttack = 3f;
     float deltatimeIncrease = 0.2f;
     int boomQuantity;
+    string boomName;
+    int boomSize;
 
     // 
     float deltaTimeUpdateDirect; // seconds
+    // Limit create boom
+    float pos_x_max;
+    float pos_y_max;
+    float pos_x_min; 
+    float pos_y_min; 
+    void SetupBoomPosLimt(){
+        pos_x_max = GameDefine.X_MAX - 1;
+        pos_x_min = GameDefine.X_MIN + 1;
+        pos_y_max = GameDefine.Y_MAX - 1;
+        pos_y_min = GameDefine.Y_MIN;
+    }
     private void Awake() {
         if(tag == "Boss1"){
             name = "Boss1";
@@ -32,7 +46,12 @@ public class BossAttribute : MonoBehaviour
             deltaTimeUpdateDirect = 5f;
             speed = 0.5f;
             boomQuantity = 1;
+            boomName = Bom.bom2;
+            boomSize = 1;
         }
+
+        // Limit random item or boom
+        SetupBoomPosLimt();
     }
 
     // update direct
@@ -68,13 +87,24 @@ public class BossAttribute : MonoBehaviour
         if(speed > SPEED_MAX){
             speed = SPEED_MAX;
         }
+        if(++boomSize > Bom.MAX_SIZE){
+            boomSize = Bom.MAX_SIZE;
+        }
         UpdateDirect();
     }
 
     // Put boom at position
     void PutBoom(){
         for(int i = 0; i < boomQuantity; i++){
-            Debug.Log("Dat bom " + i);
+            GameObject boomTemp = (GameObject)Instantiate(Resources.Load("Prefabs/" + boomName));
+            Bom bom = (Bom)boomTemp.GetComponent<Bom>();
+            bom.transform.position = new Vector3(
+                UnityEngine.Random.Range(0, pos_x_max - pos_x_min + 1) + pos_x_min,
+                UnityEngine.Random.Range(0, pos_y_max - pos_y_min + 1) + pos_y_min,
+                0
+            );
+            bom.size = boomSize;
+            bom.tagEffects = tag;
         }
     }
 
@@ -124,5 +154,11 @@ public class BossAttribute : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D other) {
+        
+        if(other.collider.tag == "Player"){
+            other.gameObject.GetComponent<Player>().PlayerDie();
+        }
+    }
 }
 

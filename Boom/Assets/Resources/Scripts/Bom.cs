@@ -7,6 +7,7 @@ public class Bom : MonoBehaviour
 {
     // types
     public static string bom1 = "Bom";
+    public static string bom2 = "Boom2";
     public int size;
     public static int MAX_SIZE = 6;
     public string tagEffects;
@@ -217,4 +218,14 @@ public class Bom : MonoBehaviour
         dtemp.GetComponent<RadarPoint>().effectTime = timer - 0.5f;
         return dtemp;
     }
+
+/// <summary>
+/// Debugger.......
+/// </summary>
+    void check(){
+        /*
+        Dựa vào vị trí(bottom center) và localScale để tạo ra các hình chữ nhật
+        Nếu các hình chữ nhật là giao nhau thì va chạm và ngăn chặn
+        */
+    }    
 }

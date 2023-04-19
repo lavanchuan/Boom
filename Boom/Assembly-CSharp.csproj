@@ -36,6 +36,8 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Resources\Scripts\Boss\BossAttribute.cs" />
+     <Compile Include="Assets\Resources\Scripts\Boss\Boss1\Boss1.cs" />
      <Compile Include="Assets\Resources\Scripts\Joystick.cs" />
      <Compile Include="Assets\Resources\Scripts\Player.cs" />
      <Compile Include="Assets\Resources\Scripts\DatBom.cs" />
@@ -67,8 +69,8 @@
      <Compile Include="Assets\Resources\Scripts\GameDefine.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\RadarPoint.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\GiayXanh.cs" />
-     <Compile Include="Assets\Resources\Scripts\Boss\BossAttribute.cs" />
-     <Compile Include="Assets\Resources\Scripts\Boss\Boss1\Boss1.cs" />
+     <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\Block\Block.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Unity\Hud\Editor\2020.3.45f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -631,97 +633,97 @@
         <HintPath>D:\Unity\Hud\Editor\2020.3.45f1\Editor\Data\NetStandard\compat\2.0.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.001">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.001.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.001.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.PixelPerfect">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.PixelPerfect.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.PixelPerfect.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="PsdPlugin">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\PsdPlugin.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\PsdPlugin.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.IK.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Psdimporter.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Psdimporter.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Psdimporter.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Path.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Path.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Path.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEditorBridge.001">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.IK.Runtime">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.IK.Runtime.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.IK.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Triangle.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Animation.Triangle.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Animation.Triangle.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Runtime">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Animation.Runtime.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Animation.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.PixelPerfect.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.PixelPerfect.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.PixelPerfect.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.DeviceSimulator.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.DeviceSimulator.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.DeviceSimulator.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Common.Runtime">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.SpriteShape.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Common.Editor">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Common.Editor.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.Common.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.SpriteShape.Runtime">
-        <HintPath>D:\Chuan\Project\Unity\Boom\Boom\Library\ScriptAssemblies\Unity.2D.SpriteShape.Runtime.dll</HintPath>
+        <HintPath>D:\Chuan\Project\Unity\Boom2\Boom\Boom\Library\ScriptAssemblies\Unity.2D.SpriteShape.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

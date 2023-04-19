@@ -273,8 +273,7 @@ public class Player : MonoBehaviour
     IEnumerator LiveInWater(){
         yield return new WaitForSeconds(timeLiveInWater);
         if(this.choked){
-            Debug.Log("PLAYER ... DIE");
-            Destroy(gameObject);
+            PlayerDie();
         }
     }
 
@@ -399,5 +398,10 @@ public class Player : MonoBehaviour
         this.isUseRadar = false;
     }
     
+    // DIE...
+    public void PlayerDie(){
+        Debug.Log("Player Die... <><><>");
+        Destroy(gameObject);
+    }
 }
 
