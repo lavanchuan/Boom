@@ -1,0 +1,42 @@
+﻿1. Các loại phương tiện di chuyển
+- Rùa
+Có 2 loại:
++ Rùa 2 mắt: Đi chậm, có thể dùng Cá hộp cho nó biến thành rùa 2 mắt.
++ Rùa 1 mắt: Đi nhanh.
+- Cú: Tốc độ bình thường
+- Đĩa bay:
++ Đĩa bay hỏng: tốc độ chậm, đi được xuyên tường, không ăn được item, có thể dùng cờ lê để sữa
++ Đĩa bay không hỏng: Tốc độ nhanh, đi được xuyên tường, không ăn được item
+2. Các vật phẩm dùng(chức năng)
+- Bàn nhảy: nhảy qua chướng ngại vật
+(ok)- Ra đa: Xem tầm nổ của bóng nước
+- Thấu kính: Xem các đồ vật bị ẩn trong thơi gian ngắn(2 ô)
+(ok)- Kim: Thoát khỏi bóng nước
+- Keo giảm tốc: Tạo ra mạn nhện, ai dẫm vào sẽ bị giảm tốc trong thời gian ngắn
+- Phi tiêu: Bắn vào bom để nó nổ
+- Bình ô xy: Giúp bạn cầm cự lâu hơn trong nước
+- Bẫy chuột: Tạo ra bẫy ở giữa 2 chướng ngại vật không phá được. Ai đi bào sẽ bị nhốt trong bóng nước, Không thể phá hủy trừ khi có người chơi đi vào
+- Đinh: Tạo ra đinh, ai đặt bom thì sẽ nổ luôn, không thể phá hủy trừ khi có người đặt bom vào
+- Khoan: khoan chương ngại vật phá hủy được
+(ok)- Khiên: Bất tử trong thời gian ngắn(tạo ra màng bảo vệ)
+- Bom hẹn giờ: Nhấn lần 1 để đặt, lần 2 kích nổ
+- Vỏ chuối: Khi giẫm vào vỏ chuối sẽ bị trượt và không kiểm soát được cho đến khi va vào chướng ngại vật
+3. Các vật phẩm tự động có tác dụng:
+(ok)- Bóng nước: số bom + 1
+(ok)- Bình nước: độ dài bom +1
+(ok)- Bóng gai: Độ dài boom MAX
+(ok)- Giày đỏ: tốc độ + 1
+(ok)- Giày vàng: Tốc độ MAX
+(ok)- Giày xanh: Giúp b8:56 PM 18/04/2023ạn đá được bom: Setup player for canKickBoom(true) -> 
+- Găng tay: Giúp bạn ném đưuọc bom
+(ok)- Khiên supper man: Số bom max, độ dài bom max, tốc độ max, tác dụng trong thời gian ngắn
+(ok)- Quỷ đỏ(mặt nạ): Tốc độ MAX và đá được boma
+(ok)- Quỷ xanh: Lấy đi 1 vật phẩm tăng lực bạn ăn được
+(ok)- Quỷ tím: Làm bạn đi ngược hoặc tự đặt bom trong thời gian ngắn
+(ok)- Áo tàng hình: Tàng hình trong thời gian ngắn
+
+Công việc:
+- Ngăn boom nổ không xuyên qua các khối
+- Bom dính nước cũng lập tức nổ theo
+- Boom của người chơi cần dừng lại khi đá(ok)
+- Nhân vật chạm vào boss thì die
