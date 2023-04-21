@@ -19,6 +19,7 @@ TagManager:
   - UseKim
   - Boss1
   - Limt
+  - WaterDamage
   layers:
   - Default
   - TransparentFX

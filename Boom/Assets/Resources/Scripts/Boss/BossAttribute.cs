@@ -98,6 +98,7 @@ public class BossAttribute : MonoBehaviour
         for(int i = 0; i < boomQuantity; i++){
             GameObject boomTemp = (GameObject)Instantiate(Resources.Load("Prefabs/" + boomName));
             Bom bom = (Bom)boomTemp.GetComponent<Bom>();
+            bom.GetComponent<CircleCollider2D>().isTrigger = false; // !important
             bom.transform.position = new Vector3(
                 UnityEngine.Random.Range(0, pos_x_max - pos_x_min + 1) + pos_x_min,
                 UnityEngine.Random.Range(0, pos_y_max - pos_y_min + 1) + pos_y_min,

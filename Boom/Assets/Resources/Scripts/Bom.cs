@@ -1,3 +1,4 @@
+using System.Drawing;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,9 +9,10 @@ public class Bom : MonoBehaviour
     // types
     public static string bom1 = "Bom";
     public static string bom2 = "Boom2";
-    public int size;
+    public int size = 1;
     public static int MAX_SIZE = 6;
     public string tagEffects;
+    public bool onRadar;
 
     // component
     CircleCollider2D circleCollider2D;
@@ -27,15 +29,21 @@ public class Bom : MonoBehaviour
         currentPos = new Vector2(transform.position.x, transform.position.y);
         direct = GameDefine.DIRECT.NONE;
         circleCollider2D = GetComponent<CircleCollider2D>();
+        onRadar = false;
+    }
+
+    private void Start() {
         Boom();
     }
 
     private void Update() {
         currentPos = transform.localPosition; // [update]
+
         try{
-            GameObject go = GameObject.FindGameObjectWithTag(tagEffects);
-            if(tagEffects == "Player" && go.GetComponent<Player>().GetIsUseRadar()){
-                ViewRadar(go);
+            GameObject go = GameObject.FindGameObjectWithTag("Player");
+            onRadar = go.GetComponent<Player>().GetIsUseRadar();
+            if(onRadar){
+                ViewRadar();// for size
             }
         } catch(Exception e){}
     }
@@ -68,7 +76,9 @@ public class Bom : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        // Debug.Log(this.gameObject.GetComponent<CircleCollider2D>().enabled);
+        if(other.tag == Damage.TAG){
+            ExplosiveBoom();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -91,11 +101,21 @@ public class Bom : MonoBehaviour
         }
 
         // with block,...
-        if(other.collider.tag == "Block"){
+        if(other.collider.tag == "Block" || other.collider.tag == "Bom"){
             this.speed = 0;
             this.direct = GameDefine.DIRECT.NONE;
             return;
         }
+
+        // with water damage
+        if(other.collider.tag == Damage.TAG){
+            ExplosiveBoom();
+        }
+    }
+
+    // Set timer
+    public void SetEffectTime(float effectTime){
+        this.timer = effectTime;
     }
 
     // Phat no
@@ -108,6 +128,62 @@ public class Bom : MonoBehaviour
     IEnumerator IBoom(float time)
     {
         yield return new WaitForSeconds(time - 1);
+        // // damage
+        // GameObject damage;
+        // Vector2 pos = transform.localPosition;
+        // pos.y = pos.y + transform.localScale.y/2;
+        // int i;
+        // // center
+        // damage = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
+        // damage.transform.localPosition = pos;
+        // // left
+        // for (i = 1; i <= size; i++)
+        // {
+        //     GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
+        //     dtemp.transform.localPosition = new Vector2(pos.x - i * transform.localScale.x, pos.y);
+        //     if(!GameObjectCheck.CheckExplosiveArea(dtemp)){
+        //         break;
+        //     }
+        // }
+        // // right
+        // for (i = 1; i <= size; i++)
+        // {
+        //     GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
+        //     dtemp.transform.localPosition = new Vector2(pos.x + i * transform.localScale.x, pos.y);
+        //     if(!GameObjectCheck.CheckExplosiveArea(dtemp)){
+        //         break;
+        //     }
+        // }
+        // // top
+        // for (i = 1; i <= size; i++)
+        // {
+        //     GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
+        //     dtemp.transform.localPosition = new Vector2(pos.x, pos.y + i * transform.localScale.y);
+        //     if(!GameObjectCheck.CheckExplosiveArea(dtemp)){
+        //         break;
+        //     }
+        // }
+        // // bottom
+        // for (i = 1; i <= size; i++)
+        // {
+        //     GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
+        //     dtemp.transform.localPosition = new Vector2(pos.x, pos.y - i * transform.localScale.y);
+        //     if(!GameObjectCheck.CheckExplosiveArea(dtemp)){
+        //         break;
+        //     }
+        // }
+
+        // // damage
+        // yield return new WaitForSeconds(0.1f);
+        // RestoreBoomQuantity(tagEffects);
+        // Destroy(gameObject);
+
+        // Explosive ...
+        ExplosiveBoom();
+    }
+
+    // Explosive
+    public void ExplosiveBoom(){
         // damage
         GameObject damage;
         Vector2 pos = transform.localPosition;
@@ -121,28 +197,40 @@ public class Bom : MonoBehaviour
         {
             GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
             dtemp.transform.localPosition = new Vector2(pos.x - i * transform.localScale.x, pos.y);
+            if(!GameObjectCheck.CheckExplosiveArea(dtemp)){
+                break;
+            }
         }
         // right
         for (i = 1; i <= size; i++)
         {
             GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
             dtemp.transform.localPosition = new Vector2(pos.x + i * transform.localScale.x, pos.y);
+            if(!GameObjectCheck.CheckExplosiveArea(dtemp)){
+                break;
+            }
         }
         // top
         for (i = 1; i <= size; i++)
         {
             GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
             dtemp.transform.localPosition = new Vector2(pos.x, pos.y + i * transform.localScale.y);
+            if(!GameObjectCheck.CheckExplosiveArea(dtemp)){
+                break;
+            }
         }
         // bottom
         for (i = 1; i <= size; i++)
         {
             GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
             dtemp.transform.localPosition = new Vector2(pos.x, pos.y - i * transform.localScale.y);
+            if(!GameObjectCheck.CheckExplosiveArea(dtemp)){
+                break;
+            }
         }
 
         // damage
-        yield return new WaitForSeconds(0.1f);
+        // yield return new WaitForSeconds(0.1f);
         RestoreBoomQuantity(tagEffects);
         Destroy(gameObject);
     }
@@ -175,40 +263,36 @@ public class Bom : MonoBehaviour
     }
 
     // ViewRadar(GameObject go)
-    void ViewRadar(GameObject go){
-        if(go.tag == "Player"){
-            Player player = go.GetComponent<Player>();
-            Vector2 pos = transform.localPosition;
-            pos.y = pos.y + transform.localScale.y/2;
-            int size = player.GetBoomSize();
-            int i;
-            // center
-            GameObject temp = CreateRadarPoint();
-            temp.transform.localPosition = pos;
-            // left
-            for (i = 1; i <= size; i++)
-            {
-                GameObject dtemp = CreateRadarPoint();
-                dtemp.transform.localPosition = new Vector2(pos.x - i * transform.localScale.x, pos.y);
-            }
-            // right
-            for (i = 1; i <= size; i++)
-            {
-                GameObject dtemp = CreateRadarPoint();
-                dtemp.transform.localPosition = new Vector2(pos.x + i * transform.localScale.x, pos.y);
-            }
-            // top
-            for (i = 1; i <= size; i++)
-            {
-                GameObject dtemp = CreateRadarPoint();
-                dtemp.transform.localPosition = new Vector2(pos.x, pos.y + i * transform.localScale.y);
-            }
-            // bottom
-            for (i = 1; i <= size; i++)
-            {
-                GameObject dtemp = CreateRadarPoint();
-                dtemp.transform.localPosition = new Vector2(pos.x, pos.y - i * transform.localScale.y);
-            }
+    void ViewRadar(){
+        Vector2 pos = transform.localPosition;
+        pos.y = pos.y + transform.localScale.y/2;
+        int i;
+        // center
+        GameObject temp = CreateRadarPoint();
+        temp.transform.localPosition = pos;
+        // left
+        for (i = 1; i <= size; i++)
+        {
+            GameObject dtemp = CreateRadarPoint();
+            dtemp.transform.localPosition = new Vector2(pos.x - i * transform.localScale.x, pos.y);
+        }
+        // right
+        for (i = 1; i <= size; i++)
+        {
+            GameObject dtemp = CreateRadarPoint();
+            dtemp.transform.localPosition = new Vector2(pos.x + i * transform.localScale.x, pos.y);
+        }
+        // top
+        for (i = 1; i <= size; i++)
+        {
+            GameObject dtemp = CreateRadarPoint();
+            dtemp.transform.localPosition = new Vector2(pos.x, pos.y + i * transform.localScale.y);
+        }
+        // bottom
+        for (i = 1; i <= size; i++)
+        {
+            GameObject dtemp = CreateRadarPoint();
+            dtemp.transform.localPosition = new Vector2(pos.x, pos.y - i * transform.localScale.y);
         }
     }
 
@@ -219,13 +303,5 @@ public class Bom : MonoBehaviour
         return dtemp;
     }
 
-/// <summary>
-/// Debugger.......
-/// </summary>
-    void check(){
-        /*
-        Dựa vào vị trí(bottom center) và localScale để tạo ra các hình chữ nhật
-        Nếu các hình chữ nhật là giao nhau thì va chạm và ngăn chặn
-        */
-    }    
+        
 }

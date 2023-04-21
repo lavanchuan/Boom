@@ -1,3 +1,4 @@
+using System;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,11 +25,16 @@ public class Player : MonoBehaviour
     GameObject bom;
 
     // item info
-    int bomQuantity = 1;
+    int bomQuantity = 10;
     const int MAX_BOOM_QUANTITY = 15;
     string bomName;
-    int sizeBom = 1;
+    int sizeBom = 2;
     int kimQuantity = 0;
+    int radarQuantity = 1;
+    int timeBombQuantity = 1;
+    bool putTimeBomb;
+    GameObject timeBomb;
+
 
     // COMPONENT
     Animator animator;
@@ -40,6 +46,8 @@ public class Player : MonoBehaviour
         this.timeLiveInWater = TIME_LIVE_IN_WATER_DEFAULT;
         bomName = Bom.bom1;
         speed = SPEED_DEFAULT;
+        putTimeBomb = false;
+        timeBomb = null;
     }
     private void Update()
     {
@@ -376,7 +384,6 @@ public class Player : MonoBehaviour
     }
 
     // Radar
-    int radarQuantity = 0;
     bool isUseRadar = false;
     public void IncreaseRadarQuantity(int quantity){this.radarQuantity += quantity;}
     public void DecreaseRadarQuantity(int quantity){
@@ -396,6 +403,46 @@ public class Player : MonoBehaviour
     IEnumerator RadarEffect(float effectTime){
         yield return new WaitForSeconds(effectTime);
         this.isUseRadar = false;
+    }
+
+    // Time bomb
+    public void IncreaseTimeBombQuantity(int quantity){
+        timeBombQuantity += quantity;
+    }
+
+    public void DecreaseTimeBombQuantity(int quantity){
+        timeBombQuantity -= quantity;
+        if(timeBombQuantity < 0){timeBombQuantity = 0;}
+    }
+
+    public int GetTimeBombQuantity(){return timeBombQuantity;}
+
+    public bool GetPutTimeBomb(){
+        try{
+            if(timeBomb != null && putTimeBomb) return putTimeBomb;
+        } catch (Exception e){
+            putTimeBomb = false;
+        }
+        return putTimeBomb;
+    }
+
+    public void PutTimeBomb(){
+        if(GetTimeBombQuantity() > 0){
+            putTimeBomb = true;
+            timeBomb = (GameObject)Instantiate(Resources.Load("prefabs/TimeBomb"));
+            timeBomb.transform.position = new Vector2(transform.localPosition.x,
+            transform.localPosition.y - transform.localScale.y/2);
+            timeBomb.GetComponent<Bom>().SetEffectTime(999f);
+            timeBomb.GetComponent<Bom>().size = sizeBom;
+            timeBomb.GetComponent<Bom>().tagEffects = this.gameObject.tag;
+            bomQuantity--;
+            DecreaseTimeBombQuantity(1);
+        }
+    }
+
+    public void ActiveExplosiveTimeBomb(){
+        putTimeBomb = false;
+        timeBomb.GetComponent<Bom>().ExplosiveBoom();
     }
     
     // DIE...

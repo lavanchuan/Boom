@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
+    public static readonly string TAG = "WaterDamage";
     bool choked = true;
     int speed = 1;
 
@@ -25,7 +26,8 @@ public class Damage : MonoBehaviour
             }
         }
 
-        if(other.tag == "Block"){
+        if(other.tag == "Block" && !other.GetComponent<MayDropItem>().breaked){
+            other.GetComponent<MayDropItem>().BreakBlock();
             Destroy(other.gameObject);
         }
     }
