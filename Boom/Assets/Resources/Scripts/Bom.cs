@@ -24,6 +24,8 @@ public class Bom : MonoBehaviour
     GameDefine.DIRECT direct;
     
     float timer = 5;
+    // Damage ->
+    public float dmg;
     private void Awake()
     {
         currentPos = new Vector2(transform.position.x, transform.position.y);
@@ -187,15 +189,21 @@ public class Bom : MonoBehaviour
         // damage
         GameObject damage;
         Vector2 pos = transform.localPosition;
-        pos.y = pos.y + transform.localScale.y/2;
+        pos.y = pos.y;// + transform.localScale.y/2;
         int i;
         // center
-        damage = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
+        damage = (GameObject)Instantiate(Resources.Load("Prefabs/DamageCenter"));
+        damage.GetComponent<Damage>().SetDmg(dmg);
+        damage.GetComponent<Damage>().effects = tagEffects;
         damage.transform.localPosition = pos;
         // left
         for (i = 1; i <= size; i++)
         {
-            GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
+            GameObject dtemp;
+            if(i == size){dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageLeft2"));}
+            else {dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageLeft1"));}
+            dtemp.GetComponent<Damage>().SetDmg(dmg);
+            dtemp.GetComponent<Damage>().effects = tagEffects;
             dtemp.transform.localPosition = new Vector2(pos.x - i * transform.localScale.x, pos.y);
             if(!GameObjectCheck.CheckExplosiveArea(dtemp)){
                 break;
@@ -204,7 +212,11 @@ public class Bom : MonoBehaviour
         // right
         for (i = 1; i <= size; i++)
         {
-            GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
+            GameObject dtemp;
+            if(i == size){dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageRight2"));}
+            else {dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageRight1"));}
+            dtemp.GetComponent<Damage>().SetDmg(dmg);
+            dtemp.GetComponent<Damage>().effects = tagEffects;
             dtemp.transform.localPosition = new Vector2(pos.x + i * transform.localScale.x, pos.y);
             if(!GameObjectCheck.CheckExplosiveArea(dtemp)){
                 break;
@@ -213,7 +225,11 @@ public class Bom : MonoBehaviour
         // top
         for (i = 1; i <= size; i++)
         {
-            GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
+            GameObject dtemp;
+            if(i == size){dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageUp2"));}
+            else {dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageUp1"));}
+            dtemp.GetComponent<Damage>().SetDmg(dmg);
+            dtemp.GetComponent<Damage>().effects = tagEffects;
             dtemp.transform.localPosition = new Vector2(pos.x, pos.y + i * transform.localScale.y);
             if(!GameObjectCheck.CheckExplosiveArea(dtemp)){
                 break;
@@ -222,7 +238,11 @@ public class Bom : MonoBehaviour
         // bottom
         for (i = 1; i <= size; i++)
         {
-            GameObject dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/Damage"));
+            GameObject dtemp;
+            if(i == size){dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageDown2"));}
+            else {dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageDown1"));}
+            dtemp.GetComponent<Damage>().SetDmg(dmg);
+            dtemp.GetComponent<Damage>().effects = tagEffects;
             dtemp.transform.localPosition = new Vector2(pos.x, pos.y - i * transform.localScale.y);
             if(!GameObjectCheck.CheckExplosiveArea(dtemp)){
                 break;

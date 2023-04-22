@@ -8,10 +8,10 @@ public class BossAttribute : MonoBehaviour
 {
     private string name;
     private string descript;
-    private int health = 1;
+    private float health = 1;
     private bool attacking = false;
     private int direct = GameDefine.DOWN;
-    private int healthCurrent;
+    private float healthCurrent;
     private float speed;
     private const float SPEED_MAX = 2f;
     float speedIncrease = 0.05f;
@@ -23,6 +23,7 @@ public class BossAttribute : MonoBehaviour
     int boomQuantity;
     string boomName;
     int boomSize;
+    bool attacked;
 
     // 
     float deltaTimeUpdateDirect; // seconds
@@ -48,6 +49,7 @@ public class BossAttribute : MonoBehaviour
             boomQuantity = 1;
             boomName = Bom.bom2;
             boomSize = 1;
+            attacked = false;
         }
 
         // Limit random item or boom
@@ -114,7 +116,7 @@ public class BossAttribute : MonoBehaviour
 
     void UpdateAnimator(){
         animator.SetInteger("Direct", direct);
-        animator.SetInteger("Health", healthCurrent);
+        animator.SetInteger("Health", (int)healthCurrent>=1?(int)healthCurrent:1);
         animator.SetBool("Attacking", attacking);
     }
 
@@ -125,6 +127,10 @@ public class BossAttribute : MonoBehaviour
     }
 
     private void Update() {
+        // info
+        Debug.Log("Health " + tag + ": " + healthCurrent);
+        if(healthCurrent <= 0){Destroy(gameObject);}
+
         UpdateAnimator();
         if(health > 0) {
             Move();
@@ -160,6 +166,23 @@ public class BossAttribute : MonoBehaviour
         if(other.collider.tag == "Player"){
             other.gameObject.GetComponent<Player>().PlayerDie();
         }
+    }
+
+    // health
+    public void DecreaseHealthCurrent(float damage){
+        if(!attacked){
+            healthCurrent -= damage;
+            attacked = true;
+            StartCoroutine(EffectAttacked(0.1f));
+            if(health == 0){
+                Debug.Log(tag + " ... die");
+            }
+        } 
+    }
+
+    IEnumerator EffectAttacked(float effectTime){
+        yield return new WaitForSeconds(effectTime);
+        attacked = false;
     }
 }
 

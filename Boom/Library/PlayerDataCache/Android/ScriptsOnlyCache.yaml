@@ -2,21 +2,37 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - BinhNuoc
+    - Block
     - Bom
     - BomDemo
     - BongGai
     - BoomItem
+    - BossAttribute
     - ControlPlayer
     - DK
     - Damage
     - DatBom
+    - GameManager
     - GiayDo
     - GiayVang
     - GiayXanh
+    - GreenDemoniacMask
     - Kim
+    - MayDropItem
     - Player
+    - Radar
+    - RadarJoystick
+    - RadarPoint
+    - RedDemoniacMask
+    - Shield
+    - ShieldJoystick
+    - SuperShield
+    - TimeBomb
+    - TimeBombJoystick
     - TouchCheck
     - UseKim
+    - VioletDemoniacMask
+    - VisibleOvercoat
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
@@ -37,10 +53,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -77,37 +91,69 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1588}
+      Script: {instanceID: 1462}
     - Class: 114
-      Script: {instanceID: 1654}
+      Script: {instanceID: 1594}
     - Class: 114
-      Script: {instanceID: 2290}
+      Script: {instanceID: 1660}
     - Class: 114
-      Script: {instanceID: 2374}
+      Script: {instanceID: 2214}
     - Class: 114
-      Script: {instanceID: 2854}
+      Script: {instanceID: 2298}
     - Class: 114
-      Script: {instanceID: 3468}
+      Script: {instanceID: 2320}
     - Class: 114
-      Script: {instanceID: 3542}
+      Script: {instanceID: 2384}
     - Class: 114
-      Script: {instanceID: 3940}
+      Script: {instanceID: 2388}
     - Class: 114
-      Script: {instanceID: 4302}
+      Script: {instanceID: 2608}
     - Class: 114
-      Script: {instanceID: 4340}
+      Script: {instanceID: 2850}
     - Class: 114
-      Script: {instanceID: 4360}
+      Script: {instanceID: 2872}
     - Class: 114
-      Script: {instanceID: 4922}
+      Script: {instanceID: 2892}
     - Class: 114
-      Script: {instanceID: 5142}
+      Script: {instanceID: 3216}
     - Class: 114
-      Script: {instanceID: 21786}
+      Script: {instanceID: 3490}
     - Class: 114
-      Script: {instanceID: 22920}
+      Script: {instanceID: 3564}
     - Class: 114
-      Script: {instanceID: 23994}
+      Script: {instanceID: 3864}
+    - Class: 114
+      Script: {instanceID: 3874}
+    - Class: 114
+      Script: {instanceID: 3966}
+    - Class: 114
+      Script: {instanceID: 4308}
+    - Class: 114
+      Script: {instanceID: 4330}
+    - Class: 114
+      Script: {instanceID: 4368}
+    - Class: 114
+      Script: {instanceID: 4388}
+    - Class: 114
+      Script: {instanceID: 4408}
+    - Class: 114
+      Script: {instanceID: 4502}
+    - Class: 114
+      Script: {instanceID: 4956}
+    - Class: 114
+      Script: {instanceID: 5008}
+    - Class: 114
+      Script: {instanceID: 5134}
+    - Class: 114
+      Script: {instanceID: 5146}
+    - Class: 114
+      Script: {instanceID: 5182}
+    - Class: 114
+      Script: {instanceID: 5220}
+    - Class: 114
+      Script: {instanceID: 5370}
+    - Class: 114
+      Script: {instanceID: 5598}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -121,6 +167,18 @@ ScriptsOnlyBuild:
     - Class: 251
       Script: {instanceID: 0}
   scriptHashData:
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BossAttribute
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Boss1
   - hash:
       serializedVersion: 2
       Hash: 5ab533713adae59372fb3e10a585c186
@@ -249,6 +307,18 @@ ScriptsOnlyBuild:
     className: Text
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ShieldJoystick
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameObjectCheck
+  - hash:
+      serializedVersion: 2
       Hash: 4de78781075c75589cdbaad292fb6cff
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner
@@ -267,6 +337,12 @@ ScriptsOnlyBuild:
     className: BinhNuoc
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GreenDemoniacMask
+  - hash:
+      serializedVersion: 2
       Hash: c1d728126ff1918728036c59106d32b2
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -276,6 +352,12 @@ ScriptsOnlyBuild:
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
+    className: Shield
+  - hash:
+      serializedVersion: 2
+      Hash: c9e35738d55b08808725d24824219e6c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
     className: ControlPlayer
   - hash:
       serializedVersion: 2
@@ -283,6 +365,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: IKManager2D
+  - hash:
+      serializedVersion: 2
+      Hash: 5b33eafc3fa72c6d4ef68743033ec2da
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MayDropItem
   - hash:
       serializedVersion: 2
       Hash: a1aa98c78061c6f03a8c124cda576e67
@@ -336,7 +424,19 @@ ScriptsOnlyBuild:
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
+    className: RadarJoystick
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
     className: BomDemo
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Kim
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -379,6 +479,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
     className: TestResultRendererCallback
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RedDemoniacMask
   - hash:
       serializedVersion: 2
       Hash: 748dd2a2a28da4e618912da5ac45684b
@@ -483,6 +589,18 @@ ScriptsOnlyBuild:
     className: BaseInput
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Radar
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameManager
+  - hash:
+      serializedVersion: 2
       Hash: 18c222bef9ae745ce69ddde9b74337ca
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -570,6 +688,12 @@ ScriptsOnlyBuild:
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
+    className: Block
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
     className: DK
   - hash:
       serializedVersion: 2
@@ -597,6 +721,12 @@ ScriptsOnlyBuild:
     className: BongGai
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TimeBombJoystick
+  - hash:
+      serializedVersion: 2
       Hash: b424b4eeb810aecb0ff91c62639241e9
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.Experimental.U2D.Animation
@@ -607,6 +737,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: ControlTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: VisibleOvercoat
   - hash:
       serializedVersion: 2
       Hash: 3165968ba45c74472d279ba04455fccb
@@ -675,10 +811,16 @@ ScriptsOnlyBuild:
     className: TMP_SubMeshUI
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: be3be909c0314f83ec5ace7fee3d36d5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Damage
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TimeBomb
   - hash:
       serializedVersion: 2
       Hash: fd68d84f33fad85aac38f2739c0ee270
@@ -693,10 +835,28 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: b7e9b7b8b027fa3514304264fc99a529
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UseKim
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SuperShield
+  - hash:
+      serializedVersion: 2
+      Hash: 94f157ec9ea2022dad0851a8e1e3b877
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Bom
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: VioletDemoniacMask
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -709,6 +869,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.U2D.Animation
     className: BufferManager
+  - hash:
+      serializedVersion: 2
+      Hash: a985d83f39919ad6696dbfd432d21565
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RadarPoint
   - hash:
       serializedVersion: 2
       Hash: 8220b46879dc5e37db1b940c938f5744
@@ -745,18 +911,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GiayXanh
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Kim
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: UseKim
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity

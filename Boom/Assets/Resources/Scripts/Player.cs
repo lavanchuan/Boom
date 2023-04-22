@@ -12,6 +12,10 @@ public class Player : MonoBehaviour
     public static float SPEED_DEFAULT = 3f;
     float lastSpeed; // speed hien tai - phuc hoi khi dung kim
     public int direct;
+    bool onLeft = false;
+    bool onRight = false;
+    bool onUp = false;
+    bool onDown = false;
     const int LEFT = 1;
     const int RIGHT = 2;
     const int UP = 3;
@@ -34,6 +38,7 @@ public class Player : MonoBehaviour
     int timeBombQuantity = 1;
     bool putTimeBomb;
     GameObject timeBomb;
+    float damageByBoom;
 
 
     // COMPONENT
@@ -48,6 +53,7 @@ public class Player : MonoBehaviour
         speed = SPEED_DEFAULT;
         putTimeBomb = false;
         timeBomb = null;
+        damageByBoom = 4f;
     }
     private void Update()
     {
@@ -58,23 +64,26 @@ public class Player : MonoBehaviour
         animator.SetBool("choked", choked);
         animator.SetBool("isVisible", isVisible);
         animator.SetBool("isUseShield", shieldUsing);
-
+        /*MOVE*/
         // move with direct
-        switch (direct)
-        {
-            case LEFT:
-                left();
-                break;
-            case RIGHT:
-                right();
-                break;
-            case DOWN:
-                down();
-                break;
-            case UP:
-                up();
-                break;
-        }
+        // switch (direct)
+        // {
+        //     case LEFT:
+        //         left();
+        //         break;
+        //     case RIGHT:
+        //         right();
+        //         break;
+        //     case DOWN:
+        //         down();
+        //         break;
+        //     case UP:
+        //         up();
+        //         break;
+        // }
+        
+        Move();
+        /*MOVE*/
 
         // direct = 0;
     }
@@ -174,14 +183,30 @@ public class Player : MonoBehaviour
                 break;
         }
     }
-
+    // Move
+    void Move(){
+        onLeft = GameObject.FindGameObjectWithTag(ControlPlayer.TAG_LEFT_DIRECT)
+        .GetComponent<ControlPlayer>().leftPressed;
+        onRight = GameObject.FindGameObjectWithTag(ControlPlayer.TAG_RIGHT_DIRECT)
+        .GetComponent<ControlPlayer>().rightPressed;
+        onUp = GameObject.FindGameObjectWithTag(ControlPlayer.TAG_UP_DIRECT)
+        .GetComponent<ControlPlayer>().upPressed;
+        onDown = GameObject.FindGameObjectWithTag(ControlPlayer.TAG_DOWN_DIRECT)
+        .GetComponent<ControlPlayer>().downPressed;
+        
+        if(onLeft) left();
+        if(onRight) right();
+        if(onUp) up();
+        if(onDown) down();
+    }
     // Set Boom
     public void CreateBom(){
         bom = (GameObject) Instantiate(Resources.Load("Prefabs/" + bomName));
-        bom.transform.localPosition = new Vector2(transform.localPosition.x,
-            transform.localPosition.y - bom.transform.localScale.y/2);
         bom.GetComponent<Bom>().size = sizeBom;
         bom.GetComponent<Bom>().tagEffects = this.gameObject.tag;
+        bom.GetComponent<Bom>().dmg = damageByBoom;
+        bom.transform.localPosition = new Vector2(transform.localPosition.x,
+            transform.localPosition.y - bom.transform.localScale.y/2);
     }
 
     // set size boom
@@ -430,11 +455,12 @@ public class Player : MonoBehaviour
         if(GetTimeBombQuantity() > 0){
             putTimeBomb = true;
             timeBomb = (GameObject)Instantiate(Resources.Load("prefabs/TimeBomb"));
-            timeBomb.transform.position = new Vector2(transform.localPosition.x,
-            transform.localPosition.y - transform.localScale.y/2);
             timeBomb.GetComponent<Bom>().SetEffectTime(999f);
             timeBomb.GetComponent<Bom>().size = sizeBom;
             timeBomb.GetComponent<Bom>().tagEffects = this.gameObject.tag;
+            timeBomb.GetComponent<Bom>().dmg = damageByBoom;
+            timeBomb.transform.position = new Vector2(transform.localPosition.x,
+            transform.localPosition.y - transform.localScale.y/2);
             bomQuantity--;
             DecreaseTimeBombQuantity(1);
         }
