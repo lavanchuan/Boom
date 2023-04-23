@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         speed = SPEED_DEFAULT;
         putTimeBomb = false;
         timeBomb = null;
-        damageByBoom = 4f;
+        damageByBoom = 10f;
     }
     private void Update()
     {

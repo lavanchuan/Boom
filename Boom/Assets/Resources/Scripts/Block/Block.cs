@@ -8,6 +8,9 @@ public class Block : MonoBehaviour
         GameObject.FindGameObjectWithTag("MainCamera")
         .GetComponent<GameManager>().listBlock.Add(gameObject);
 
+        GameObject.FindGameObjectWithTag("MainCamera")
+        .GetComponent<GameManager>().listBlockRectangle.Add(gameObject);
+
         // setup position
         Vector3 pos = transform.position;
         pos.z = 0;

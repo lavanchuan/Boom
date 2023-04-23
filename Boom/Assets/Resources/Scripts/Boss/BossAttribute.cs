@@ -116,7 +116,7 @@ public class BossAttribute : MonoBehaviour
 
     void UpdateAnimator(){
         animator.SetInteger("Direct", direct);
-        animator.SetInteger("Health", (int)healthCurrent>=1?(int)healthCurrent:1);
+        animator.SetInteger("Health", (int)health);
         animator.SetBool("Attacking", attacking);
     }
 
@@ -127,10 +127,6 @@ public class BossAttribute : MonoBehaviour
     }
 
     private void Update() {
-        // info
-        Debug.Log("Health " + tag + ": " + healthCurrent);
-        if(healthCurrent <= 0){Destroy(gameObject);}
-
         UpdateAnimator();
         if(health > 0) {
             Move();
@@ -172,10 +168,11 @@ public class BossAttribute : MonoBehaviour
     public void DecreaseHealthCurrent(float damage){
         if(!attacked){
             healthCurrent -= damage;
+            if(healthCurrent < 0){healthCurrent = 0;}
             attacked = true;
             StartCoroutine(EffectAttacked(0.1f));
-            if(health == 0){
-                Debug.Log(tag + " ... die");
+            if(healthCurrent == 0){
+                StartCoroutine(EffectDie(2f));
             }
         } 
     }
@@ -183,6 +180,11 @@ public class BossAttribute : MonoBehaviour
     IEnumerator EffectAttacked(float effectTime){
         yield return new WaitForSeconds(effectTime);
         attacked = false;
+    }
+
+    IEnumerator EffectDie(float effectTime){
+        yield return new WaitForSeconds(effectTime);
+        Destroy(gameObject);
     }
 }
 

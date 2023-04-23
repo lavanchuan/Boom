@@ -5,10 +5,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public ArrayList listBlock;
+    public ArrayList listBlockRectangle;
     public static bool running;
     public static ArrayList itemsMayDrop;// string: name prefabs of item
     private void Awake() {
         listBlock = new ArrayList();
+        listBlockRectangle = new ArrayList();
         running = true;
         itemsMayDrop = new ArrayList();
         SetupItemsMayDrop();
