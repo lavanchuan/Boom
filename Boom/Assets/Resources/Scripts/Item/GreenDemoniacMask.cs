@@ -10,6 +10,11 @@ public class GreenDemoniacMask : MonoBehaviour
     const int DECREASE_SIZE_BOOM = 1;
     int count = 2;
     int current;
+    float time;
+    float timeCanDestroy = 1f;
+    private void Update() {
+        time += Time.deltaTime;
+    }
 
     private void Awake() {
         current = UnityEngine.Random.Range(0, 1000) % count;
@@ -26,6 +31,10 @@ public class GreenDemoniacMask : MonoBehaviour
                     playerComponent.DecreaseSizeBoom(1);
                     break;
             }
+            Destroy(gameObject);
+        }
+
+        if(other.tag == "WaterDamage" && time >= timeCanDestroy){
             Destroy(gameObject);
         }
     }

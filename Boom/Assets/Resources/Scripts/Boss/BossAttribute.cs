@@ -10,13 +10,14 @@ public class BossAttribute : MonoBehaviour
     private string descript;
     private float health = 1;
     private bool attacking = false;
-    private int direct = GameDefine.DOWN;
+    private int direct = GameDefine.STAND;
     private float healthCurrent;
     private float speed;
     private const float SPEED_MAX = 2f;
     float speedIncrease = 0.05f;
     private ArrayList items;
     const int HEALTH_BOSS_1 = 20;
+    const int HEALTH_BOSS_TURTLE = 100;
     float deltaTimeAttack = 10f;
     float minDeltaTimeAttack = 3f;
     float deltatimeIncrease = 0.2f;
@@ -32,7 +33,7 @@ public class BossAttribute : MonoBehaviour
     float pos_y_max;
     float pos_x_min; 
     float pos_y_min; 
-    void SetupBoomPosLimt(){
+    void SetupBoomPosLimit(){
         pos_x_max = GameDefine.X_MAX - 1;
         pos_x_min = GameDefine.X_MIN + 1;
         pos_y_max = GameDefine.Y_MAX - 1;
@@ -50,15 +51,27 @@ public class BossAttribute : MonoBehaviour
             boomName = Bom.bom2;
             boomSize = 1;
             attacked = false;
+            // Limit random item or boom
+            SetupBoomPosLimit();
         }
 
-        // Limit random item or boom
-        SetupBoomPosLimt();
+        // SEA TURTLE BOSS
+        if(tag == AttributeTurtle.TAG){
+            name = AttributeTurtle.NAME;
+            descript = "...";
+            health = AttributeTurtle.MAX_HEALTH;
+            healthCurrent = health;
+            speed = AttributeTurtle.SPEED_DEFAULT;
+            attacked = false;
+        }
+
     }
 
     // update direct
     void UpdateDirect(){
-        direct = UnityEngine.Random.Range(100, 1000) % 5;
+        if(tag == "Boss1"){
+            direct = UnityEngine.Random.Range(100, 1000) % 5;
+        }
     }
 
     IEnumerator EffectUpdateDirect(){
@@ -116,29 +129,42 @@ public class BossAttribute : MonoBehaviour
 
     void UpdateAnimator(){
         animator.SetInteger("Direct", direct);
-        animator.SetInteger("Health", (int)health);
+        animator.SetInteger("Health", (int)healthCurrent);
         animator.SetBool("Attacking", attacking);
     }
 
     private void Start() {
         animator = GetComponent<Animator>();
-        StartCoroutine(EffectUpdateDirect());
-        StartCoroutine(EffectAttack());
+        if(tag == "Boss1"){
+            StartCoroutine(EffectUpdateDirect());
+            StartCoroutine(EffectAttack());
+        } else if(tag == AttributeTurtle.TAG){
+            GetComponent<AttributeTurtle>().UpdateDirect(healthCurrent);
+        }
     }
 
     private void Update() {
-        UpdateAnimator();
-        if(health > 0) {
-            Move();
+        if(tag == "Boss1") UpdateAnimator();
+        if(tag == AttributeTurtle.TAG){
+            animator.SetInteger("Health", (int)healthCurrent);
+            GetComponent<AttributeTurtle>().UpdateAnimator();
+        }
+        if(healthCurrent > 0) {
+            if(tag == "Boss1") {
+                Move();
+                // update direct if attack
+                if(attacking){direct = GameDefine.STAND;}
+            } 
+            // else if(tag == AttributeTurtle.TAG){
+            //     GetComponent<AttributeTurtle>().Move(speed);
+            //     // Move();
+            // }
         }
 
-        // update direct if attack
-        if(attacking){direct = GameDefine.STAND;}
     }
 
     // Move
     void Move(){
-
         if(direct == GameDefine.DOWN){
             transform.localPosition = new Vector2(transform.localPosition.x, 
             transform.localPosition.y - speed * Time.deltaTime);
@@ -158,15 +184,27 @@ public class BossAttribute : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        
-        if(other.collider.tag == "Player"){
+        if(other.collider.tag == "Player" && 
+            !other.collider.GetComponent<Player>().GetShieldUsing()
+            && healthCurrent > 0){
             other.gameObject.GetComponent<Player>().PlayerDie();
         }
     }
 
+    // Trigger
+    private void OnTriggerEnter2D(Collider2D other) {
+        // Player
+        if(other.tag == "Player" && !other.GetComponent<Player>().GetShieldUsing()){
+            if(tag == AttributeTurtle.TAG && healthCurrent > 0)
+            other.GetComponent<Player>().PlayerDie();
+        }
+        // Sea Start
+        
+    }
+
     // health
     public void DecreaseHealthCurrent(float damage){
-        if(!attacked){
+        if(tag == "Boss1" && !attacked){
             healthCurrent -= damage;
             if(healthCurrent < 0){healthCurrent = 0;}
             attacked = true;
@@ -174,7 +212,16 @@ public class BossAttribute : MonoBehaviour
             if(healthCurrent == 0){
                 StartCoroutine(EffectDie(2f));
             }
-        } 
+        }
+
+        if(tag == AttributeTurtle.TAG){
+            healthCurrent -= damage;
+            if(healthCurrent < 1){healthCurrent = 0;} // < 1
+            if(healthCurrent == 0){
+                GetComponent<AttributeTurtle>().ChokedState();
+            }
+        }
+
     }
 
     IEnumerator EffectAttacked(float effectTime){
@@ -186,5 +233,10 @@ public class BossAttribute : MonoBehaviour
         yield return new WaitForSeconds(effectTime);
         Destroy(gameObject);
     }
+
+    // Set Direct
+    public void SetDirect(int direct){this.direct = direct;}
+    public float GetHealthCurrent(){return this.healthCurrent;}
+
 }
 

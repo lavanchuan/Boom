@@ -5,9 +5,18 @@ using UnityEngine;
 public class Kim : MonoBehaviour
 {
     int quantity = 1;
+    float time;
+    float timeCanDestroy = 1f;
+    private void Update() {
+        time += Time.deltaTime;
+    }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Player" && !other.GetComponent<Player>().GetChoked()){
-            other.GetComponent<Player>().IncreaseKimQuantity(quantity);
+            other.GetComponent<Player>().IncreaseNeedleQuantity(quantity);
+            Destroy(gameObject);
+        }
+
+        if(other.tag == "WaterDamage" && time >= timeCanDestroy){
             Destroy(gameObject);
         }
     }

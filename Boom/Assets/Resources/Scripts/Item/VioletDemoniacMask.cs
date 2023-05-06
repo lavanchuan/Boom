@@ -10,6 +10,11 @@ public class VioletDemoniacMask : MonoBehaviour
     float effectTime = 15f;
     bool isContratyDirect = false;
     float deltaTimePut = 1f;
+    float time;
+    float timeCanDestroy = 1f;
+    private void Update() {
+        time += Time.deltaTime;
+    }
 
     private void Awake() {
         if(UnityEngine.Random.Range(0, 1000) % 2 == 0) isContratyDirect = true;
@@ -22,6 +27,10 @@ public class VioletDemoniacMask : MonoBehaviour
             } else {
                 other.GetComponent<Player>().StaetAutoPutBoomByVioletDemoniacMask(effectTime, deltaTimePut);
             }
+            Destroy(gameObject);
+        }
+
+        if(other.tag == "WaterDamage" && time >= timeCanDestroy){
             Destroy(gameObject);
         }
     }

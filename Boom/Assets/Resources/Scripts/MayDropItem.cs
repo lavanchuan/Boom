@@ -17,7 +17,8 @@ public class MayDropItem : MonoBehaviour
         int rate = UnityEngine.Random.Range(min, max);
         if(rate <= itemDropRate * (max - min) + min){
             isDropItem = true;
-            indexItem = UnityEngine.Random.Range(0, GameManager.itemsMayDrop.Count);
+            indexItem = UnityEngine.Random.Range(0, 
+            Camera.main.GetComponent<GameManager>().GetItemsMayDrop().Count);
         }
     }
 
@@ -25,13 +26,15 @@ public class MayDropItem : MonoBehaviour
         breaked = true;
         if(isDropItem){
             GameObject item = CreateItem();
-            item.transform.position = transform.position;
+            Vector3 pos = transform.position;
+            // pos.y -= transform.localScale.y/2;
+            item.transform.position = pos;
         }
-        // Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     GameObject CreateItem(){
         return (GameObject)Instantiate(Resources.Load("prefabs/" 
-            + GameManager.itemsMayDrop[indexItem]));
+            + Camera.main.GetComponent<GameManager>().GetItemsMayDrop()[indexItem]));
     }
 }

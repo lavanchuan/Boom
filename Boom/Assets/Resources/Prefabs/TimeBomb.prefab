@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 616559188091155269, guid: db5b1e131ee1b054ca9d407a5fe28c7f, type: 3}
   m_Color: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
   m_FlipX: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   size: 0
   tagEffects: 
   onRadar: 0
+  dmg: 0
 --- !u!58 &2548367211225444125
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -18,8 +18,13 @@ TagManager:
   - BinhNuoc
   - UseKim
   - Boss1
-  - Limt
   - WaterDamage
+  - Sound
+  - BossTurtle
+  - Limit
+  - SeaStart
+  - BlockMayBroken
+  - BlockNotBroken
   layers:
   - Default
   - TransparentFX

@@ -5,15 +5,25 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public ArrayList listBlock;
-    public ArrayList listBlockRectangle;
     public static bool running;
-    public static ArrayList itemsMayDrop;// string: name prefabs of item
+    ArrayList itemsMayDrop;// string: path prefabs of item
+    ArrayList coinsMayDrop;// string: path prefabs of coin
+    // GAME PLAY STATE
+    public GameDefine.GAMEPLAY_STATE gamePlayState;
+    // Sound Game Object
+    Sound sound;
     private void Awake() {
+        gamePlayState = GameDefine.GAMEPLAY_STATE.PLAYING;
         listBlock = new ArrayList();
-        listBlockRectangle = new ArrayList();
         running = true;
         itemsMayDrop = new ArrayList();
+        coinsMayDrop = new ArrayList();
         SetupItemsMayDrop();
+        SetUpCoinMayDrop();
+    }
+    // Start
+    private void Start() {
+        sound = GameObject.FindGameObjectWithTag(Sound.TAG).GetComponent<Sound>();
     }
     // Setup items may drop
     void SetupItemsMayDrop(){
@@ -34,5 +44,27 @@ public class GameManager : MonoBehaviour
         itemsMayDrop.Add("ItemUse/Radar");
         itemsMayDrop.Add("ItemUse/Shield");
         itemsMayDrop.Add("ItemUse/TimeBomb");
+
+        // coin
+        itemsMayDrop.Add("Coin/GoldCoin");
+        itemsMayDrop.Add("Coin/BronzeCoin");
+        itemsMayDrop.Add("Coin/SilverCoin");
+
     }
+
+    void SetUpCoinMayDrop(){
+        coinsMayDrop.Add("Coin/GoldCoin");
+        coinsMayDrop.Add("Coin/BronzeCoin");
+        coinsMayDrop.Add("Coin/SilverCoin");
+        coinsMayDrop.Add("Coin/GoldenBag");
+
+    }
+
+    private void Update() {
+       
+    }
+
+    public ArrayList GetItemsMayDrop(){return this.itemsMayDrop;}
+    public ArrayList GetCoinsMayDrop(){return this.coinsMayDrop;}
+ 
 }

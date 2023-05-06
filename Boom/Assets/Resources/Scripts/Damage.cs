@@ -19,29 +19,32 @@ public class Damage : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("Attack " + other.tag);
-        if(other.tag == "Player"){
-            if(!other.GetComponent<Player>().GetChoked() 
-            && !other.GetComponent<Player>().GetShieldUsing()){
-                other.GetComponent<Player>().SetChoked(choked);
-                other.GetComponent<Player>().StateChoke(speed);
+    private void OnCollisionEnter2D(Collision2D other) {
+        // Debug.Log("Attack " + other.collider.tag);
+        
+        if(other.collider.tag == "Player"){
+            if(!other.collider.GetComponent<Player>().GetChoked() 
+            && !other.collider.GetComponent<Player>().GetShieldUsing()){
+                other.collider.GetComponent<Player>().SetChoked(choked);
+                other.collider.GetComponent<Player>().StateChoke(speed);
             }
         }
 
-        if(other.tag == "Block" && !other.GetComponent<MayDropItem>().breaked){
-            other.GetComponent<MayDropItem>().BreakBlock();
-            Destroy(other.gameObject);
+        // DEBUG
+        if(other.collider.tag == GameDefine.TAG_BLOCK_MAY_BROKEN 
+            && !other.collider.GetComponent<MayDropItem>().breaked){
+            other.collider.GetComponent<MayDropItem>().BreakBlock();
         }
 
-        if(other.tag == "Boss1"){
+        if(other.collider.tag == "Boss1"){
             if(tag == effects){return;}
-            other.GetComponent<BossAttribute>().DecreaseHealthCurrent(dmg);
+            other.collider.GetComponent<BossAttribute>().DecreaseHealthCurrent(dmg);
         }
     }
 
     public void SetDmg(float dmg){
         this.dmg = dmg;
     }
+    public float GetDmg(){return this.dmg;}
     
 }

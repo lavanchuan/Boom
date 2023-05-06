@@ -70,12 +70,4 @@ public class ControlPlayer : MonoBehaviour
         }
     }
 
-    void SetDirectPlayer(GameDefine.DIRECT direct)
-    {
-        try{
-            player.GetComponent<Player>().SetDirect(direct);
-        } catch(Exception e){}
-    }
-
-
 }

@@ -39,8 +39,8 @@
      <Compile Include="Assets\Resources\Scripts\Boss\BossAttribute.cs" />
      <Compile Include="Assets\Resources\Scripts\Boss\Boss1\Boss1.cs" />
      <Compile Include="Assets\Resources\Scripts\Joystick.cs" />
-     <Compile Include="Assets\Resources\Scripts\Player.cs" />
      <Compile Include="Assets\Resources\Scripts\DatBom.cs" />
+     <Compile Include="Assets\Resources\Scripts\PlayTime\PlayTime.cs" />
      <Compile Include="Assets\Resources\Scripts\Boom.cs" />
      <Compile Include="Assets\Resources\Scripts\DK\ShieldJoystick.cs" />
      <Compile Include="Assets\Resources\Scripts\Function\GameObjectCheck.cs" />
@@ -48,15 +48,19 @@
      <Compile Include="Assets\Resources\Scripts\Item\GreenDemoniacMask.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\Shield.cs" />
      <Compile Include="Assets\Resources\Scripts\ControlPlayer.cs" />
+     <Compile Include="Assets\Resources\Prefabs\Test 1\CircleTest.cs" />
      <Compile Include="Assets\Resources\Scripts\MayDropItem.cs" />
+     <Compile Include="Assets\Resources\Scripts\Item\Coin.cs" />
      <Compile Include="Assets\Resources\Scripts\Item.cs" />
      <Compile Include="Assets\Resources\Scripts\DK\RadarJoystick.cs" />
-     <Compile Include="Assets\Resources\Scripts\BomDemo.cs" />
+     <Compile Include="Assets\Resources\Scripts\Boss\Turtle\AttributeTurtle.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\Kim.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\RedDemoniacMask.cs" />
+     <Compile Include="Assets\Resources\Prefabs\Test 1\SquareTest.cs" />
      <Compile Include="Assets\Resources\Scripts\BoomItem.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\GiayVang.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\Radar.cs" />
+     <Compile Include="Assets\Resources\Scripts\Boss\MayDropItemBoss.cs" />
      <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
      <Compile Include="Assets\Resources\Scripts\TouchCheck.cs" />
      <Compile Include="Assets\Resources\Scripts\Block\Block.cs" />
@@ -64,18 +68,21 @@
      <Compile Include="Assets\Resources\Scripts\Item\GiayDo.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\BongGai.cs" />
      <Compile Include="Assets\Resources\Scripts\DK\TimeBombJoystick.cs" />
-     <Compile Include="Assets\Resources\Scripts\test.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\VisibleOvercoat.cs" />
+     <Compile Include="Assets\Resources\Scripts\Audio\Sound.cs" />
      <Compile Include="Assets\Resources\Scripts\Damage.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\TimeBomb.cs" />
+     <Compile Include="Assets\Resources\Scripts\Function\FunctionMethod.cs" />
      <Compile Include="Assets\Resources\Scripts\DK\UseKim.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\SuperShield.cs" />
      <Compile Include="Assets\Resources\Scripts\Bom.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\VioletDemoniacMask.cs" />
      <Compile Include="Assets\Resources\Scripts\GameDefine.cs" />
+     <Compile Include="Assets\Resources\Scripts\Boss\SeaStart\AttributeSeaStart.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\RadarPoint.cs" />
+     <Compile Include="Assets\Resources\Scripts\Player\Player.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\GiayXanh.cs" />
-     <Compile Include="Assets\Resources\Scripts\test\PlayerTest.cs" />
+     <Compile Include="Assets\Resources\Scripts\Boom\CheckSizeBoom.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Unity\Hud\Editor\2020.3.45f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

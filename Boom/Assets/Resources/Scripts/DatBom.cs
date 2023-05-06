@@ -20,7 +20,7 @@ public class DatBom : MonoBehaviour
 
     void DBom(){
         if(!playerComponent.IsBoomEmpty()){
-            playerComponent.DatBom();
+            playerComponent.PutBoom();
             // Debug.Log("Da dat 1 qua bom");
         } else {
             // Debug.Log("Het bom de dat");

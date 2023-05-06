@@ -9,7 +9,7 @@ public class Bom : MonoBehaviour
     // types
     public static string bom1 = "Bom";
     public static string bom2 = "Boom2";
-    public int size = 1;
+    public int size = 3;
     public static int MAX_SIZE = 6;
     public string tagEffects;
     public bool onRadar;
@@ -23,9 +23,13 @@ public class Bom : MonoBehaviour
     Vector2 currentPos;
     GameDefine.DIRECT direct;
     
-    float timer = 5;
+    float timer = 5f;
     // Damage ->
     public float dmg;
+
+    // Check size explosive game object
+    public float sizeLeft, sizeRight, sizeUp, sizeDown;
+
     private void Awake()
     {
         currentPos = new Vector2(transform.position.x, transform.position.y);
@@ -35,10 +39,43 @@ public class Bom : MonoBehaviour
     }
 
     private void Start() {
+        sizeLeft = sizeUp = sizeRight = sizeDown = size;
+        CheckSizeBoom csbGOL, csbGOR, csbGOD, csbGOU;
+        GameObject go1 = (GameObject)Instantiate(Resources.Load(CheckSizeBoom.PATH_PREFABS));
+        csbGOL = go1.GetComponent<CheckSizeBoom>();
+        csbGOL.target = gameObject;
+        csbGOL.direct = GameDefine.LEFT;
+
+        GameObject go2 = (GameObject)Instantiate(Resources.Load(CheckSizeBoom.PATH_PREFABS));
+        csbGOR = go2.GetComponent<CheckSizeBoom>();
+        csbGOR.target = gameObject;
+        csbGOR.direct = GameDefine.RIGHT;
+
+        GameObject go3 = (GameObject)Instantiate(Resources.Load(CheckSizeBoom.PATH_PREFABS));
+        csbGOD = go3.GetComponent<CheckSizeBoom>();
+        csbGOD.target = gameObject;
+        csbGOD.direct = GameDefine.DOWN;
+
+        GameObject go4 = (GameObject)Instantiate(Resources.Load(CheckSizeBoom.PATH_PREFABS));
+        csbGOU = go4.GetComponent<CheckSizeBoom>();
+        csbGOU.target = gameObject;
+        csbGOU.direct = GameDefine.UP;
+
         Boom();
     }
 
     private void Update() {
+        Debug.Log("SIZE:\t" + size);
+        // sizeLeft = csbGO.sizeExplosiveTargetLeft;
+        // sizeRight = csbGO.sizeExplosiveTargetRight;
+        // sizeUp = csbGO.sizeExplosiveTargetUp;
+        // sizeDown = csbGO.sizeExplosiveTargetDown;
+        if(sizeLeft == -1) sizeLeft = size;
+        if(sizeRight == -1) sizeRight = size;
+        if(sizeUp == -1) sizeUp = size;
+        if(sizeDown == -1) sizeDown = size;
+
+
         currentPos = transform.localPosition; // [update]
 
         try{
@@ -81,6 +118,10 @@ public class Bom : MonoBehaviour
         if(other.tag == Damage.TAG){
             ExplosiveBoom();
         }
+
+        if(other.tag == AttributeSeaStart.TAG){
+            other.gameObject.GetComponent<AttributeSeaStart>().UpdateDirect();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -103,7 +144,9 @@ public class Bom : MonoBehaviour
         }
 
         // with block,...
-        if(other.collider.tag == "Block" || other.collider.tag == "Bom"){
+        if(other.collider.tag == GameDefine.TAG_BLOCK_MAY_BROKEN 
+            || other.collider.tag == GameDefine.TAG_BLOCK_NOT_BROKEN
+            || other.collider.tag == GameDefine.TAG_BLOCK_LIMIT){
             this.speed = 0;
             this.direct = GameDefine.DIRECT.NONE;
             return;
@@ -186,6 +229,12 @@ public class Bom : MonoBehaviour
 
     // Explosive
     public void ExplosiveBoom(){
+        Debug.Log("Size: " + size);
+        Debug.Log("Size Left:\t" + sizeLeft);
+        Debug.Log("Size RIGHT:\t" + sizeRight);
+        Debug.Log("Size DOWN:\t" + sizeDown);
+        Debug.Log("Size UP:\t" + sizeUp);
+
         // damage
         GameObject damage;
         Vector2 pos = transform.localPosition;
@@ -197,10 +246,10 @@ public class Bom : MonoBehaviour
         damage.GetComponent<Damage>().effects = tagEffects;
         damage.transform.localPosition = pos;
         // left
-        for (i = 1; i <= size; i++)
+        for (i = 1; i <= sizeLeft; i++)
         {
             GameObject dtemp;
-            if(i == size){dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageLeft2"));}
+            if(i == (int)sizeLeft){dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageLeft2"));}
             else {dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageLeft1"));}
             dtemp.GetComponent<Damage>().SetDmg(dmg);
             dtemp.GetComponent<Damage>().effects = tagEffects;
@@ -210,10 +259,10 @@ public class Bom : MonoBehaviour
             }
         }
         // right
-        for (i = 1; i <= size; i++)
+        for (i = 1; i <= sizeRight; i++)
         {
             GameObject dtemp;
-            if(i == size){dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageRight2"));}
+            if(i == (int)sizeRight){dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageRight2"));}
             else {dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageRight1"));}
             dtemp.GetComponent<Damage>().SetDmg(dmg);
             dtemp.GetComponent<Damage>().effects = tagEffects;
@@ -223,10 +272,10 @@ public class Bom : MonoBehaviour
             }
         }
         // top
-        for (i = 1; i <= size; i++)
+        for (i = 1; i <= sizeUp; i++)
         {
             GameObject dtemp;
-            if(i == size){dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageUp2"));}
+            if(i == (int)sizeUp){dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageUp2"));}
             else {dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageUp1"));}
             dtemp.GetComponent<Damage>().SetDmg(dmg);
             dtemp.GetComponent<Damage>().effects = tagEffects;
@@ -236,10 +285,10 @@ public class Bom : MonoBehaviour
             }
         }
         // bottom
-        for (i = 1; i <= size; i++)
+        for (i = 1; i <= sizeDown; i++)
         {
             GameObject dtemp;
-            if(i == size){dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageDown2"));}
+            if(i == (int)sizeDown){dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageDown2"));}
             else {dtemp = (GameObject)Instantiate(Resources.Load("Prefabs/DamageDown1"));}
             dtemp.GetComponent<Damage>().SetDmg(dmg);
             dtemp.GetComponent<Damage>().effects = tagEffects;
@@ -252,6 +301,7 @@ public class Bom : MonoBehaviour
         // damage
         // yield return new WaitForSeconds(0.1f);
         RestoreBoomQuantity(tagEffects);
+        // csbGO.DestroyCheckSizeBoom();
         Destroy(gameObject);
     }
 
@@ -291,25 +341,25 @@ public class Bom : MonoBehaviour
         GameObject temp = CreateRadarPoint();
         temp.transform.localPosition = pos;
         // left
-        for (i = 1; i <= size; i++)
+        for (i = 1; i <= sizeLeft; i++)
         {
             GameObject dtemp = CreateRadarPoint();
             dtemp.transform.localPosition = new Vector2(pos.x - i * transform.localScale.x, pos.y);
         }
         // right
-        for (i = 1; i <= size; i++)
+        for (i = 1; i <= sizeRight; i++)
         {
             GameObject dtemp = CreateRadarPoint();
             dtemp.transform.localPosition = new Vector2(pos.x + i * transform.localScale.x, pos.y);
         }
         // top
-        for (i = 1; i <= size; i++)
+        for (i = 1; i <= sizeUp; i++)
         {
             GameObject dtemp = CreateRadarPoint();
             dtemp.transform.localPosition = new Vector2(pos.x, pos.y + i * transform.localScale.y);
         }
         // bottom
-        for (i = 1; i <= size; i++)
+        for (i = 1; i <= sizeDown; i++)
         {
             GameObject dtemp = CreateRadarPoint();
             dtemp.transform.localPosition = new Vector2(pos.x, pos.y - i * transform.localScale.y);
