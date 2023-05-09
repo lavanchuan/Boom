@@ -9,6 +9,7 @@ public class Sound : MonoBehaviour
     public static string PLAYER_DIE = "die";
     public static string GAME_START = "start";
     public static readonly string COIN = "coin";
+    public static readonly string WIN = "win";
     // Start is called before the first frame update
     void Start()
     {

@@ -29,9 +29,9 @@ public class AttributeSeaStart : MonoBehaviour
     ArrayList DIRECT_MAY_MOVE;
 
     public int typeDirect;
-    const int horizonDirect = 1;
-    const int verticalDirect = 2;
-    const int fullDirect = 0;
+    int horizonDirect = GameDefine.HORIZON_DIRECT;
+    int verticalDirect = GameDefine.VERTICAL_DIRECT;
+    int fullDirect = GameDefine.FULL_DIRECT;
     
     private void Awake() {
         dmg = 10f;
@@ -40,8 +40,12 @@ public class AttributeSeaStart : MonoBehaviour
         direct = GameDefine.STAND;
         breaking = false;
         DIRECT_MAY_MOVE = new ArrayList();
-        // typeDirect = UnityEngine.Random.Range(0, 3);
-        // Debug.Log(typeDirect);
+
+        if(typeDirect != GameDefine.FULL_DIRECT
+            && typeDirect != GameDefine.VERTICAL_DIRECT
+            && typeDirect != GameDefine.HORIZON_DIRECT){
+            typeDirect = UnityEngine.Random.Range(0, 3);
+        }
 
         int[] directTest;
         if(typeDirect == horizonDirect){
@@ -228,6 +232,9 @@ public class AttributeSeaStart : MonoBehaviour
         boxCollider2d.isTrigger = true;
         transform.rotation = Quaternion.Euler(0, 0, 0);
         yield return new WaitForSeconds(TIME_BROKEN);
+        Vector2 posItem = new Vector2(transform.localPosition.x,
+            transform.localPosition.y - transform.localScale.y/2);
+        GetComponent<MayDropItemBoss>().DropItem(posItem);
         Destroy(gameObject);
     }
 

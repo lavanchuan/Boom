@@ -49,16 +49,16 @@ public class Block : MonoBehaviour
         }
     }
 
-    // private void OnCollisionStay2D(Collision2D other) {
-    //     if(other.gameObject.tag == "Player" 
-    //         && !other.gameObject.GetComponent<Player>().GetChoked()){
-    //         if(tag == GameDefine.TAG_BLOCK_MAY_BROKEN){
-    //             try{
-    //                 Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
-    //                 rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
-    //             } catch (Exception){}
-    //         }
-    //         return;
-    //     }
-    // }
+    private void OnCollisionStay2D(Collision2D other) {
+        if(other.gameObject.tag == "Player" 
+            && !other.gameObject.GetComponent<Player>().GetChoked()){
+            if(tag == GameDefine.TAG_BLOCK_MAY_BROKEN){
+                try{
+                    Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
+                    rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
+                } catch (Exception){}
+            }
+            return;
+        }
+    }
 }

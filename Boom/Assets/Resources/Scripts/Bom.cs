@@ -9,7 +9,7 @@ public class Bom : MonoBehaviour
     // types
     public static string bom1 = "Bom";
     public static string bom2 = "Boom2";
-    public int size = 3;
+    public int size = 1;
     public static int MAX_SIZE = 6;
     public string tagEffects;
     public bool onRadar;
@@ -44,21 +44,25 @@ public class Bom : MonoBehaviour
         GameObject go1 = (GameObject)Instantiate(Resources.Load(CheckSizeBoom.PATH_PREFABS));
         csbGOL = go1.GetComponent<CheckSizeBoom>();
         csbGOL.target = gameObject;
+        csbGOL.sizeCheck = size;
         csbGOL.direct = GameDefine.LEFT;
 
         GameObject go2 = (GameObject)Instantiate(Resources.Load(CheckSizeBoom.PATH_PREFABS));
         csbGOR = go2.GetComponent<CheckSizeBoom>();
         csbGOR.target = gameObject;
+        csbGOR.sizeCheck = size;
         csbGOR.direct = GameDefine.RIGHT;
 
         GameObject go3 = (GameObject)Instantiate(Resources.Load(CheckSizeBoom.PATH_PREFABS));
         csbGOD = go3.GetComponent<CheckSizeBoom>();
         csbGOD.target = gameObject;
+        csbGOD.sizeCheck = size;
         csbGOD.direct = GameDefine.DOWN;
 
         GameObject go4 = (GameObject)Instantiate(Resources.Load(CheckSizeBoom.PATH_PREFABS));
         csbGOU = go4.GetComponent<CheckSizeBoom>();
         csbGOU.target = gameObject;
+        csbGOU.sizeCheck = size;
         csbGOU.direct = GameDefine.UP;
 
         Boom();
@@ -230,10 +234,10 @@ public class Bom : MonoBehaviour
     // Explosive
     public void ExplosiveBoom(){
         Debug.Log("Size: " + size);
-        Debug.Log("Size Left:\t" + sizeLeft);
-        Debug.Log("Size RIGHT:\t" + sizeRight);
-        Debug.Log("Size DOWN:\t" + sizeDown);
-        Debug.Log("Size UP:\t" + sizeUp);
+        // Debug.Log("Size Left:\t" + sizeLeft);
+        // Debug.Log("Size RIGHT:\t" + sizeRight);
+        // Debug.Log("Size DOWN:\t" + sizeDown);
+        // Debug.Log("Size UP:\t" + sizeUp);
 
         // damage
         GameObject damage;
@@ -246,6 +250,7 @@ public class Bom : MonoBehaviour
         damage.GetComponent<Damage>().effects = tagEffects;
         damage.transform.localPosition = pos;
         // left
+        // if(sizeLeft % 1 >= 0.1f) sizeLeft += 1; 
         for (i = 1; i <= sizeLeft; i++)
         {
             GameObject dtemp;
@@ -259,6 +264,7 @@ public class Bom : MonoBehaviour
             }
         }
         // right
+        // if(sizeRight % 1 >= 0.1f) sizeRight += 1; 
         for (i = 1; i <= sizeRight; i++)
         {
             GameObject dtemp;
@@ -272,6 +278,7 @@ public class Bom : MonoBehaviour
             }
         }
         // top
+        // if(sizeUp % 1 >= 0.1f) sizeUp += 1; 
         for (i = 1; i <= sizeUp; i++)
         {
             GameObject dtemp;
@@ -285,6 +292,7 @@ public class Bom : MonoBehaviour
             }
         }
         // bottom
+        // if(sizeDown % 1 >= 0.1f) sizeDown += 1; 
         for (i = 1; i <= sizeDown; i++)
         {
             GameObject dtemp;

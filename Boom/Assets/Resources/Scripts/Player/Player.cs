@@ -29,15 +29,15 @@ public class Player : MonoBehaviour
     GameObject timeBomb;
     GameObject shield;
     // Items info
-    int boomQuantity = 2;
+    int boomQuantity = 1;
     const int MAX_BOOM_QUANTITY = 15;
     string boomName;
-    int sizeBoom = 5;
-    int needleQuantity = 1;
-    int radarQuantity = 1;
-    int timeBombQuantity = 1;
+    int sizeBoom = 1;
+    int needleQuantity = 0;
+    int radarQuantity = 0;
+    int timeBombQuantity = 0;
     bool putTimeBomb;
-    int shieldQuantity = 1;
+    int shieldQuantity = 0;
     int money;
 
     float damageByBoom;
@@ -55,9 +55,16 @@ public class Player : MonoBehaviour
         damageByBoom = 4f;
     }
 
+    public void InitDefault(){
+        sizeBoom = 1;
+        boomQuantity = 1;
+        
+    }
+
     private void Start() {
         animator = GetComponent<Animator>();
         sound = GameObject.FindGameObjectWithTag(Sound.TAG).GetComponent<Sound>();
+        InitDefault();
     }
 
     private void Update() {

@@ -1,13 +1,16 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - AttributeSeaStart
+    - AttributeTurtle
     - BinhNuoc
     - Block
     - Bom
-    - BomDemo
     - BongGai
     - BoomItem
     - BossAttribute
+    - CheckSizeBoom
+    - Coin
     - ControlPlayer
     - DK
     - Damage
@@ -19,13 +22,17 @@ ScriptsOnlyBuild:
     - GreenDemoniacMask
     - Kim
     - MayDropItem
+    - MayDropItemBoss
+    - PlayTime
     - Player
     - Radar
     - RadarJoystick
     - RadarPoint
     - RedDemoniacMask
+    - SeaStartMap01
     - Shield
     - ShieldJoystick
+    - Sound
     - SuperShield
     - TimeBomb
     - TimeBombJoystick
@@ -63,7 +70,7 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
   sceneClasses:
-    Assets/Scenes/SampleScene.unity:
+    Assets/Scenes/TurtleBoss01.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -86,6 +93,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -93,69 +104,83 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1462}
+      Script: {instanceID: 1464}
     - Class: 114
-      Script: {instanceID: 1658}
+      Script: {instanceID: 1660}
     - Class: 114
-      Script: {instanceID: 2212}
+      Script: {instanceID: 1844}
     - Class: 114
-      Script: {instanceID: 2296}
+      Script: {instanceID: 2216}
     - Class: 114
-      Script: {instanceID: 2318}
+      Script: {instanceID: 2300}
     - Class: 114
-      Script: {instanceID: 2382}
+      Script: {instanceID: 2322}
     - Class: 114
       Script: {instanceID: 2386}
     - Class: 114
-      Script: {instanceID: 2606}
+      Script: {instanceID: 2390}
     - Class: 114
-      Script: {instanceID: 2848}
+      Script: {instanceID: 2612}
     - Class: 114
-      Script: {instanceID: 2870}
+      Script: {instanceID: 2750}
     - Class: 114
-      Script: {instanceID: 2890}
+      Script: {instanceID: 2856}
     - Class: 114
-      Script: {instanceID: 3214}
+      Script: {instanceID: 2880}
     - Class: 114
-      Script: {instanceID: 3488}
+      Script: {instanceID: 2898}
     - Class: 114
-      Script: {instanceID: 3562}
+      Script: {instanceID: 3222}
     - Class: 114
-      Script: {instanceID: 3862}
+      Script: {instanceID: 3498}
+    - Class: 114
+      Script: {instanceID: 3572}
     - Class: 114
       Script: {instanceID: 3872}
     - Class: 114
-      Script: {instanceID: 3964}
+      Script: {instanceID: 3880}
     - Class: 114
-      Script: {instanceID: 4306}
+      Script: {instanceID: 3884}
     - Class: 114
-      Script: {instanceID: 4328}
+      Script: {instanceID: 3976}
     - Class: 114
-      Script: {instanceID: 4366}
+      Script: {instanceID: 4318}
     - Class: 114
-      Script: {instanceID: 4386}
+      Script: {instanceID: 4340}
     - Class: 114
-      Script: {instanceID: 4406}
+      Script: {instanceID: 4378}
     - Class: 114
-      Script: {instanceID: 4498}
+      Script: {instanceID: 4398}
     - Class: 114
-      Script: {instanceID: 4952}
+      Script: {instanceID: 4418}
     - Class: 114
-      Script: {instanceID: 5004}
+      Script: {instanceID: 4510}
     - Class: 114
-      Script: {instanceID: 5130}
+      Script: {instanceID: 4626}
     - Class: 114
-      Script: {instanceID: 5142}
+      Script: {instanceID: 4966}
     - Class: 114
-      Script: {instanceID: 5178}
+      Script: {instanceID: 5018}
     - Class: 114
-      Script: {instanceID: 5216}
+      Script: {instanceID: 5146}
     - Class: 114
-      Script: {instanceID: 5366}
+      Script: {instanceID: 5158}
     - Class: 114
-      Script: {instanceID: 5562}
+      Script: {instanceID: 5194}
     - Class: 114
-      Script: {instanceID: 5596}
+      Script: {instanceID: 5232}
+    - Class: 114
+      Script: {instanceID: 5370}
+    - Class: 114
+      Script: {instanceID: 5384}
+    - Class: 114
+      Script: {instanceID: 5580}
+    - Class: 114
+      Script: {instanceID: 5592}
+    - Class: 114
+      Script: {instanceID: 5616}
+    - Class: 114
+      Script: {instanceID: 60176}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -165,8 +190,6 @@ ScriptsOnlyBuild:
     - Class: 212
       Script: {instanceID: 0}
     - Class: 213
-      Script: {instanceID: 0}
-    - Class: 251
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -273,6 +296,12 @@ ScriptsOnlyBuild:
     className: TMP_FontAsset
   - hash:
       serializedVersion: 2
+      Hash: 4267c69372f67d813911c9d1528d1421
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayTime
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -375,6 +404,12 @@ ScriptsOnlyBuild:
     className: CanvasScaler
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Coin
+  - hash:
+      serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -426,7 +461,7 @@ ScriptsOnlyBuild:
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: BomDemo
+    className: AttributeTurtle
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -592,6 +627,12 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MayDropItemBoss
+  - hash:
+      serializedVersion: 2
+      Hash: b7dffa5ddbc2fb92a2895f145d5603f1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -765,6 +806,12 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Sound
+  - hash:
+      serializedVersion: 2
       Hash: 0fb27be807aa299702f28ad0bcad1f46
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -825,6 +872,12 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAsset
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FunctionMethod
+  - hash:
+      serializedVersion: 2
       Hash: e7a73f5f78ba6445195ec23b74a1ce2d
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -843,7 +896,7 @@ ScriptsOnlyBuild:
     className: SuperShield
   - hash:
       serializedVersion: 2
-      Hash: 94f157ec9ea2022dad0851a8e1e3b877
+      Hash: 1ca3d47f516dba100a3ca58d5a6e499d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Bom
@@ -865,6 +918,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.U2D.Animation
     className: BufferManager
+  - hash:
+      serializedVersion: 2
+      Hash: 7fdc22bc7fa9db381314b0d3bbad16d3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AttributeSeaStart
   - hash:
       serializedVersion: 2
       Hash: a985d83f39919ad6696dbfd432d21565
@@ -903,6 +962,12 @@ ScriptsOnlyBuild:
     className: Player
   - hash:
       serializedVersion: 2
+      Hash: cf5004e846126337e1d022fd95d2e9e8
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CheckSizeBoom
+  - hash:
+      serializedVersion: 2
       Hash: 762a30c8d779b11af16ed9ce1f2d32fa
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
@@ -913,7 +978,13 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GiayXanh
+  - hash:
+      serializedVersion: 2
+      Hash: 82721f832dd82625f28e1f0f510dd4f6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SeaStartMap01
   platform: 13
   scenePathNames:
-  - Assets/Scenes/SampleScene.unity
+  - Assets/Scenes/TurtleBoss01.unity
   playerPath: D:/Chuan/Project/Unity/Export/Boom

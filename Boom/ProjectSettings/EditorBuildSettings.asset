@@ -5,7 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
+    path: Assets/Scenes/TurtleBoss.unity
+    guid: 0231d362eafc7a343b8593cdaa9c325b
+  - enabled: 0
+    path: Assets/Scenes/TestPlayerScene.unity
+    guid: 1b395351c78404c4f8d3bd32a1f4da6f
+  - enabled: 1
+    path: Assets/Scenes/TurtleBoss01.unity
+    guid: 5ab0220d6a9e6c247be7e477febaa5ec
   m_configObjects: {}

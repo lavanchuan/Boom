@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public ArrayList listBlock;
     public static bool running;
+    // IN ROUND MAP(LEVLE)
+    public bool playing = true;
+    public bool isWin;
     ArrayList itemsMayDrop;// string: path prefabs of item
     ArrayList coinsMayDrop;// string: path prefabs of coin
     // GAME PLAY STATE
@@ -61,7 +64,10 @@ public class GameManager : MonoBehaviour
     }
 
     private void Update() {
-       
+        if(!playing && isWin){
+            isWin = false;
+            sound.PlaySound(Sound.WIN);
+        }
     }
 
     public ArrayList GetItemsMayDrop(){return this.itemsMayDrop;}

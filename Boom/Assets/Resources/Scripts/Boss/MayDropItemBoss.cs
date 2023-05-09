@@ -25,4 +25,13 @@ public class MayDropItemBoss : MonoBehaviour
             item.transform.localPosition = FunctionMethod.GetRelativePositionRandom();
         }
     }
+
+    public void DropItem(Vector2 pos){
+        if(UnityEngine.Random.Range(0, 1000) % 10 >= 7) return;// 70% drop item
+        string pathItem;
+        int indexItem = UnityEngine.Random.Range(0, items.Count);
+        pathItem = (string)items[indexItem];
+        GameObject item = (GameObject)Instantiate(Resources.Load("Prefabs/" + pathItem));
+        item.transform.localPosition = pos;
+    }
 }

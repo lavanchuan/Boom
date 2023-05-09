@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6417132856072345157}
   - component: {fileID: 6417132856072345158}
   - component: {fileID: 6417132856072345159}
+  - component: {fileID: 6703942725113569984}
   m_Layer: 0
   m_Name: SeaStart
   m_TagString: SeaStart
@@ -166,3 +167,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeDirect: 0
+--- !u!114 &6703942725113569984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6417132856072345161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9767ae9629c34418fb6d95d3d490aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

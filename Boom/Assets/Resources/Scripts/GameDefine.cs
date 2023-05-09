@@ -10,6 +10,9 @@ public class GameDefine : MonoBehaviour
     public static readonly int UP = 2;
     public static readonly int RIGHT = 3;
     public static readonly int LEFT = 4;
+    public static readonly int HORIZON_DIRECT = 1;
+    public static readonly int VERTICAL_DIRECT = 2;
+    public static readonly int FULL_DIRECT = 0;
     public static readonly float X_MIN = -10f; // -10
     public static readonly float X_MAX = 9f; // 9
     public static readonly float Y_MIN = -3; // -3
@@ -23,5 +26,10 @@ public class GameDefine : MonoBehaviour
     public static readonly string TAG_BLOCK_NOT_BROKEN = "BlockNotBroken";
     public static readonly string TAG_BLOCK_MAY_BROKEN = "BlockMayBroken";
     public static readonly string TAG_BLOCK_LIMIT = "Limit";
+
+    // TIME PICKUP ITEM OF LAST ROUND
+    public static readonly float TIME_PICKUP_ITEM_OF_ROUND = 10f;
+    public static readonly float TIME_LOAD_SCENE = 5f;
+    
 
 }

@@ -102,6 +102,10 @@ MonoBehaviour:
   tagEffects: 
   onRadar: 0
   dmg: 0
+  sizeLeft: 0
+  sizeRight: 0
+  sizeUp: 0
+  sizeDown: 0
 --- !u!58 &2548367211225444125
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -48,7 +48,6 @@
      <Compile Include="Assets\Resources\Scripts\Item\GreenDemoniacMask.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\Shield.cs" />
      <Compile Include="Assets\Resources\Scripts\ControlPlayer.cs" />
-     <Compile Include="Assets\Resources\Prefabs\Test 1\CircleTest.cs" />
      <Compile Include="Assets\Resources\Scripts\MayDropItem.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\Coin.cs" />
      <Compile Include="Assets\Resources\Scripts\Item.cs" />
@@ -56,7 +55,6 @@
      <Compile Include="Assets\Resources\Scripts\Boss\Turtle\AttributeTurtle.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\Kim.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\RedDemoniacMask.cs" />
-     <Compile Include="Assets\Resources\Prefabs\Test 1\SquareTest.cs" />
      <Compile Include="Assets\Resources\Scripts\BoomItem.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\GiayVang.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\Radar.cs" />
@@ -81,8 +79,9 @@
      <Compile Include="Assets\Resources\Scripts\Boss\SeaStart\AttributeSeaStart.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\RadarPoint.cs" />
      <Compile Include="Assets\Resources\Scripts\Player\Player.cs" />
-     <Compile Include="Assets\Resources\Scripts\Item\GiayXanh.cs" />
      <Compile Include="Assets\Resources\Scripts\Boom\CheckSizeBoom.cs" />
+     <Compile Include="Assets\Resources\Scripts\Item\GiayXanh.cs" />
+     <Compile Include="Assets\Resources\Scripts\TurtleBossMap\SeaStartMap01.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Unity\Hud\Editor\2020.3.45f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
