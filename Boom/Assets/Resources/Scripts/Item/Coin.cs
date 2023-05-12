@@ -31,6 +31,7 @@ public class Coin : MonoBehaviour
         if(other.tag == "Player" && !other.GetComponent<Player>().GetChoked()){
             sound.PlaySound(Sound.COIN);
             other.GetComponent<Player>().IncreaseMoney(valueMoney);
+            other.GetComponent<Player>().AddItemPickup(name.Split('(')[0].Trim(), 1);
             Destroy(gameObject);
         }
 

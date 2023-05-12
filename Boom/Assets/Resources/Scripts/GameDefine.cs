@@ -35,6 +35,11 @@ public class GameDefine : MonoBehaviour
     public static readonly string TURTLE_BOSS_MAP_1 = "Scenes/TurtleBoss01";
     public static readonly string TURTLE_BOSS_MAP_2 = "Scenes/TurtleBoss02";
     public static readonly string TURTLE_BOSS_MAP_3 = "Scenes/TurtleBoss03";
+
+    // PATH PREFABS ITEM
+    public static readonly string PATH_PREFABS_ITEM_AUTO_USE = "Prefabs/ItemAutoUse/";
+    public static readonly string PATH_PREFABS_ITEM_USE = "Prefabs/ItemUse/";
+    public static readonly string PATH_PREFABS_COIN = "Prefabs/Coin/";
     
 
 }

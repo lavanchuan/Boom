@@ -31,6 +31,7 @@ public class GreenDemoniacMask : MonoBehaviour
                     playerComponent.DecreaseSizeBoom(1);
                     break;
             }
+            other.GetComponent<Player>().AddItemPickup(name.Split('(')[0].Trim(), 1);
             Destroy(gameObject);
         }
 

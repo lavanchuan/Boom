@@ -1,3 +1,4 @@
+using System.Reflection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
     bool onLeft, onRight, onUp, onDown;
     bool isVisible = false;
     bool shieldUsing = false;
+    bool usingSuperShield;
     // Component
     Animator animator;
     // Boom
@@ -39,8 +41,10 @@ public class Player : MonoBehaviour
     bool putTimeBomb;
     int shieldQuantity = 0;
     int money;
-
     float damageByBoom;
+    // Statistic items pickup
+    ArrayList itemsPickuped; // string : name item
+    ArrayList itemsQuantity;
     // Other game object
     Sound sound;
     // Constructor
@@ -53,6 +57,12 @@ public class Player : MonoBehaviour
         putTimeBomb = false;
         timeBomb = null;
         damageByBoom = 4f;
+        this.lastSpeed = this.speed;
+        this.lastBoomQuantity = this.boomQuantity;
+        this.lastSizeBoom = this.sizeBoom;
+        // Statistic items pickuped
+        itemsPickuped = new ArrayList();
+        itemsQuantity = new ArrayList();
     }
 
     public void InitDefault(){
@@ -168,24 +178,37 @@ public class Player : MonoBehaviour
         if(this.sizeBoom > Bom.MAX_SIZE){
             this.sizeBoom = Bom.MAX_SIZE;
         }
+        this.lastSizeBoom += size;
+        if(this.lastSizeBoom >= Bom.MAX_SIZE){
+            this.lastSizeBoom = Bom.MAX_SIZE;
+        }
     }
     public void DecreaseSizeBoom(int size){
         this.sizeBoom -= size;
         if(this.sizeBoom < 1){
             this.sizeBoom = 1;
         }
+        this.lastSizeBoom -= size;
+        if(this.lastSizeBoom < 1){
+            this.lastSizeBoom = 1;
+        }
     }
     public void SetMaxSizeBoom(){
         if(this.sizeBoom != Bom.MAX_SIZE){
             this.sizeBoom = Bom.MAX_SIZE;
         }
+        this.lastSizeBoom = Bom.MAX_SIZE;
     }
     public int GetSizeBoom(){return this.sizeBoom;}
     // Shoes and Speed
     public void IncreaseSpeed(float speed){
         this.speed += speed;
-        if(this.speed > speed){
+        if(this.speed > MAX_SPEED){
             this.speed = MAX_SPEED;
+        }
+        this.lastSpeed += speed;
+        if(this.lastSpeed > MAX_SPEED){
+            this.lastSpeed = MAX_SPEED;
         }
     }
     public void DecreaseSpeed(float speed){
@@ -193,11 +216,16 @@ public class Player : MonoBehaviour
         if(this.speed < SPEED_DEFAULT){
             this.speed = SPEED_DEFAULT;
         }
+        this.lastSpeed -= speed;
+        if(this.lastSpeed < SPEED_DEFAULT){
+            this.lastSpeed = SPEED_DEFAULT;
+        }
     }
     public void SetMaxSpeed(){
         if(this.speed != MAX_SPEED){
             this.speed = MAX_SPEED;
         }
+        this.lastSpeed = MAX_SPEED;
     }
     // Kick boom
     public void setCanKickBoom(bool kick){
@@ -297,13 +325,19 @@ public class Player : MonoBehaviour
     int lastSizeBoom;
     int lastBoomQuantity;
     public void StateSuperShield(float effectTime){
-        this.lastSpeed = this.speed;
-        this.lastSizeBoom = this.sizeBoom;
-        this.lastBoomQuantity = this.boomQuantity;
-        this.speed = MAX_SPEED;
-        this.sizeBoom = Bom.MAX_SIZE;
-        this.boomQuantity = MAX_BOOM_QUANTITY;
-        StartCoroutine(SuperShield(effectTime));
+        if(!usingSuperShield){
+            this.lastSpeed = this.speed;
+            this.lastSizeBoom = this.sizeBoom;
+            this.lastBoomQuantity = this.boomQuantity;
+            this.speed = MAX_SPEED;
+            this.sizeBoom = Bom.MAX_SIZE;
+            this.boomQuantity = MAX_BOOM_QUANTITY;
+            StartCoroutine(SuperShield(effectTime));
+        } else {
+            StopCoroutine(SuperShield(effectTime));
+            StartCoroutine(SuperShield(effectTime));
+        }
+        
     }
 
     IEnumerator SuperShield(float effectTime){
@@ -326,6 +360,12 @@ public class Player : MonoBehaviour
     public int GetShieldQuantity(){return this.shieldQuantity;}
 
     public bool GetShieldUsing(){return this.shieldUsing;}
+    public void SetLastSpeed(float lastSpeed){this.lastSpeed = lastSpeed;}
+    public float GetLastSpeed(){return this.lastSpeed;}
+    public void SetLastSizeBoom(int lastSizeBoom){this.lastSizeBoom = lastSizeBoom;}
+    public int GetLastSizeBoom(){return this.lastSizeBoom;}
+    public void SetLastBoomQuantity(int lastBoomQuantity){this.lastBoomQuantity = lastBoomQuantity;}
+    public int GetLastBoomQuantity(){return this.lastBoomQuantity;}
 
     public void UseShield(){
         if(this.shieldQuantity > 0){
@@ -417,7 +457,60 @@ public class Player : MonoBehaviour
     // DIE...
     public void PlayerDie(){
         sound.PlaySound(Sound.PLAYER_DIE);
+        DropItemsPickuped();
         Destroy(gameObject);
+    }
+
+    // statisitc items pickuped
+    int GetIndexItemPickuped(string nameItem){
+        return this.itemsPickuped.IndexOf(nameItem);
+    }
+    public void AddItemPickup(string nameItem, int quantity){
+        if(GetIndexItemPickuped(nameItem) == -1){
+            this.itemsPickuped.Add(nameItem);
+            this.itemsQuantity.Add(quantity);
+        } else {
+            this.itemsQuantity[GetIndexItemPickuped(nameItem)] = 
+                (int)this.itemsQuantity[GetIndexItemPickuped(nameItem)] + quantity;
+        }
+    }
+
+    void DropItemsPickuped(){
+        for(int i = 0; i < this.itemsPickuped.Count; i++){
+            for(int j = 0; j < (int)this.itemsQuantity[i]; j++){
+                GameObject go;
+                if(this.itemsPickuped[i].Equals("BinhNuoc")
+                    || this.itemsPickuped[i].Equals("BongGai")
+                    || this.itemsPickuped[i].Equals("GiayDo")
+                    || this.itemsPickuped[i].Equals("GiayVang")
+                    || this.itemsPickuped[i].Equals("GiayXanh")
+                    || this.itemsPickuped[i].Equals("GreenDemoniacMask")
+                    || this.itemsPickuped[i].Equals("RedDemoniacMask")
+                    || this.itemsPickuped[i].Equals("VioletDemoniacMask")
+                    || this.itemsPickuped[i].Equals("VisibleOvercoat")
+                    || this.itemsPickuped[i].Equals("SuperShield")){
+                        go = (GameObject)Instantiate(Resources.Load(
+                            GameDefine.PATH_PREFABS_ITEM_AUTO_USE + itemsPickuped[i]));
+                } else if(this.itemsPickuped[i].Equals("Kim")
+                    || this.itemsPickuped[i].Equals("Radar")
+                    || this.itemsPickuped[i].Equals("Shield")
+                    || this.itemsPickuped[i].Equals("TimeBomb")){
+                        go = (GameObject)Instantiate(Resources.Load(
+                            GameDefine.PATH_PREFABS_ITEM_USE + itemsPickuped[i]));
+                } else if(this.itemsPickuped[i].Equals("GoldCoin")
+                    || this.itemsPickuped[i].Equals("BronzeCoin")
+                    || this.itemsPickuped[i].Equals("SilverCoin")
+                    || this.itemsPickuped[i].Equals("GoldenBag")){
+                        go = (GameObject)Instantiate(Resources.Load(
+                            GameDefine.PATH_PREFABS_COIN + itemsPickuped[i]));
+                } else {
+                    go = new GameObject();
+                }
+                go.transform.localPosition =  FunctionMethod.GetRelativePositionRandom();
+                
+            }
+        }
+
     }
 
 }

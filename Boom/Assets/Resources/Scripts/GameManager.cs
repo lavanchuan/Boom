@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         itemsMayDrop.Add("Coin/GoldCoin");
         itemsMayDrop.Add("Coin/BronzeCoin");
         itemsMayDrop.Add("Coin/SilverCoin");
+        itemsMayDrop.Add("Coin/GoldenBag");
 
     }
 

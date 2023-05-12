@@ -27,6 +27,7 @@ public class VioletDemoniacMask : MonoBehaviour
             } else {
                 other.GetComponent<Player>().StaetAutoPutBoomByVioletDemoniacMask(effectTime, deltaTimePut);
             }
+            other.GetComponent<Player>().AddItemPickup(name.Split('(')[0].Trim(), 1);
             Destroy(gameObject);
         }
 

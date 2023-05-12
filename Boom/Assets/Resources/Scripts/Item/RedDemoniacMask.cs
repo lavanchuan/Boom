@@ -17,6 +17,7 @@ public class RedDemoniacMask : MonoBehaviour
         if(other.tag == "Player" && !other.GetComponent<Player>().GetChoked()){
             other.GetComponent<Player>().SetMaxSpeed();
             other.GetComponent<Player>().setCanKickBoom(canKickBoom);
+            other.GetComponent<Player>().AddItemPickup(name.Split('(')[0].Trim(), 1);
             Destroy(gameObject);
         }
 

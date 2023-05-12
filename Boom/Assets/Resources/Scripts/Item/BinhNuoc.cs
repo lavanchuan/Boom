@@ -13,6 +13,7 @@ public class BinhNuoc : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Player" && !other.GetComponent<Player>().GetChoked()){
             other.gameObject.GetComponent<Player>().IncreaseSizeBoom(this.size);
+            other.GetComponent<Player>().AddItemPickup(name.Split('(')[0].Trim(), 1);
             Destroy(gameObject);
         }
 
