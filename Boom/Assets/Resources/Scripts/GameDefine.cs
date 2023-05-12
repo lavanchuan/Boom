@@ -30,6 +30,11 @@ public class GameDefine : MonoBehaviour
     // TIME PICKUP ITEM OF LAST ROUND
     public static readonly float TIME_PICKUP_ITEM_OF_ROUND = 10f;
     public static readonly float TIME_LOAD_SCENE = 5f;
+
+    // BOSS MAP STRING
+    public static readonly string TURTLE_BOSS_MAP_1 = "Scenes/TurtleBoss01";
+    public static readonly string TURTLE_BOSS_MAP_2 = "Scenes/TurtleBoss02";
+    public static readonly string TURTLE_BOSS_MAP_3 = "Scenes/TurtleBoss03";
     
 
 }

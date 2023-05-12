@@ -5,6 +5,7 @@ using UnityEngine;
 public class TouchCheck : MonoBehaviour
 {
     // GameObject player;
+    public static readonly string TAG = "TouchCheck";
 
     private void Awake()
     {

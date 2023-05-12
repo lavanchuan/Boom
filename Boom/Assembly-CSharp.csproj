@@ -64,6 +64,8 @@
      <Compile Include="Assets\Resources\Scripts\Block\Block.cs" />
      <Compile Include="Assets\Resources\Scripts\DK.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\GiayDo.cs" />
+     <Compile Include="Assets\Resources\Scripts\MainMenu\TurtleBossMap.cs" />
+     <Compile Include="Assets\Resources\Scripts\TurtleBossMap\SeaStartMapBoss.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\BongGai.cs" />
      <Compile Include="Assets\Resources\Scripts\DK\TimeBombJoystick.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\VisibleOvercoat.cs" />
@@ -78,10 +80,15 @@
      <Compile Include="Assets\Resources\Scripts\GameDefine.cs" />
      <Compile Include="Assets\Resources\Scripts\Boss\SeaStart\AttributeSeaStart.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\RadarPoint.cs" />
+     <Compile Include="Assets\Resources\Scripts\TurtleBossMap\SeaStartMap01.cs" />
      <Compile Include="Assets\Resources\Scripts\Player\Player.cs" />
      <Compile Include="Assets\Resources\Scripts\Boom\CheckSizeBoom.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\GiayXanh.cs" />
-     <Compile Include="Assets\Resources\Scripts\TurtleBossMap\SeaStartMap01.cs" />
+     <Compile Include="Assets\Resources\Scripts\MainMenu\MainMenu.cs" />
+     <Compile Include="Assets\Resources\Scripts\MainMenu\Setting.cs" />
+     <Compile Include="Assets\Resources\Scripts\MainMenu\MapChoes.cs" />
+     <Compile Include="Assets\Resources\Scripts\MainMenu\QueenMap.cs" />
+     <Compile Include="Assets\Resources\Scripts\MainMenu\TurtleMap.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Unity\Hud\Editor\2020.3.45f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

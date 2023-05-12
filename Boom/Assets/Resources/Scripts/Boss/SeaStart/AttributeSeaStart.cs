@@ -265,4 +265,7 @@ public class AttributeSeaStart : MonoBehaviour
 
         
     }
+
+    // GET TYPE DIRECT
+    public int GetTypeDirect(){return this.typeDirect;}
 }

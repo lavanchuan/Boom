@@ -69,7 +69,7 @@ public class Bom : MonoBehaviour
     }
 
     private void Update() {
-        Debug.Log("SIZE:\t" + size);
+        // Debug.Log("SIZE:\t" + size);
         // sizeLeft = csbGO.sizeExplosiveTargetLeft;
         // sizeRight = csbGO.sizeExplosiveTargetRight;
         // sizeUp = csbGO.sizeExplosiveTargetUp;
@@ -233,7 +233,7 @@ public class Bom : MonoBehaviour
 
     // Explosive
     public void ExplosiveBoom(){
-        Debug.Log("Size: " + size);
+        // Debug.Log("Size: " + size);
         // Debug.Log("Size Left:\t" + sizeLeft);
         // Debug.Log("Size RIGHT:\t" + sizeRight);
         // Debug.Log("Size DOWN:\t" + sizeDown);

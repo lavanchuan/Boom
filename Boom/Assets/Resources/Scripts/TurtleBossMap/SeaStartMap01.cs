@@ -8,6 +8,10 @@ public class SeaStartMap01 : MonoBehaviour
     public GameObject[] seaStartList;
     bool playing;
     bool isWin;
+    string pathSceneLoad;
+    public static readonly string map1 = "SeaStartsMap1";
+    public static readonly string map2 = "SeaStartsMap2";
+    public static readonly string map3 = "SeaStartsMapBoss";
     // GAME OBJECT OTHER
     GameManager gameManager;
     private void Start() {
@@ -17,6 +21,10 @@ public class SeaStartMap01 : MonoBehaviour
         foreach(GameObject go in seaStartList){
             seaStarts.Add(go);
         }
+
+        if(this.name.Equals(map1)) this.pathSceneLoad = MainMenu.PATH_SCENE_TURTLE_MAP2;
+        else if(this.name.Equals(map2)) this.pathSceneLoad = MainMenu.PATH_SCENE_TURTLE_MAP3;
+        else if(this.name.Equals(map3)) this.pathSceneLoad = MainMenu.PATH_SCENE_MAINMENU;
     }
 
     private void Update() {
@@ -39,5 +47,6 @@ public class SeaStartMap01 : MonoBehaviour
         isWin = true;
         gameManager.playing = playing;
         gameManager.isWin = isWin;
+        StartCoroutine(FunctionMethod.EffectChangeScene(pathSceneLoad, 1f));
     }
 }
