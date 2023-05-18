@@ -17,8 +17,8 @@ public class MayDropItem : MonoBehaviour
         int rate = UnityEngine.Random.Range(min, max);
         if(rate <= itemDropRate * (max - min) + min){
             isDropItem = true;
-            indexItem = UnityEngine.Random.Range(0, 
-            Camera.main.GetComponent<GameManager>().GetItemsMayDrop().Count);
+            indexItem = RateItemObject.GetItemIndex();
+            if(indexItem == -1) indexItem = 0;
         }
     }
 

@@ -25,6 +25,7 @@ TagManager:
   - SeaStart
   - BlockMayBroken
   - BlockNotBroken
+  - PauseButton
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Timer
   - 
   - 
   - 

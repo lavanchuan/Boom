@@ -9,15 +9,18 @@ public class MapChoes : MonoBehaviour
     public Button btnPlay, btnBacktrack;
     AsyncOperation loadScene;
     public string pathScenePlay;
-
+    Sound sound;
     private void Start() {
+        sound = GameObject.FindGameObjectWithTag(Sound.TAG).GetComponent<Sound>();
+
         btnPlay.enabled = false;
         btnBacktrack.onClick.AddListener(BtnBacktrack);
         btnPlay.onClick.AddListener(BtnPlay);
     }
 
     void BtnPlay(){
-        loadScene = SceneManager.LoadSceneAsync(pathScenePlay);
+        sound.PlaySound(Sound.GAME_START);
+        StartCoroutine(FunctionMethod.EffectChangeScene(pathScenePlay, 1f));
     }
 
     void BtnBacktrack(){

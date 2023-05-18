@@ -13,8 +13,11 @@ public class GameManager : MonoBehaviour
     ArrayList coinsMayDrop;// string: path prefabs of coin
     // GAME PLAY STATE
     public GameDefine.GAMEPLAY_STATE gamePlayState;
+    bool isPause;
     // Sound Game Object
     Sound sound;
+    // OTHER GAME OBJECT
+    public GameObject btnPause;
     private void Awake() {
         gamePlayState = GameDefine.GAMEPLAY_STATE.PLAYING;
         listBlock = new ArrayList();
@@ -31,6 +34,7 @@ public class GameManager : MonoBehaviour
     // Setup items may drop
     void SetupItemsMayDrop(){
         // Item auto use
+        itemsMayDrop.Add("ItemAutoUse/Bomb");
         itemsMayDrop.Add("ItemAutoUse/BinhNuoc");
         itemsMayDrop.Add("ItemAutoUse/BongGai");
         itemsMayDrop.Add("ItemAutoUse/GiayDo");
@@ -65,6 +69,8 @@ public class GameManager : MonoBehaviour
     }
 
     private void Update() {
+        isPause = btnPause.GetComponent<PauseButton>().GetIsPause();
+
         if(!playing && isWin){
             isWin = false;
             sound.PlaySound(Sound.WIN);
@@ -73,5 +79,6 @@ public class GameManager : MonoBehaviour
 
     public ArrayList GetItemsMayDrop(){return this.itemsMayDrop;}
     public ArrayList GetCoinsMayDrop(){return this.coinsMayDrop;}
+    public bool GetIsPause(){return this.isPause;}
  
 }

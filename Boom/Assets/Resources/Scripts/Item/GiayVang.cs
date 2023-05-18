@@ -7,6 +7,7 @@ public class GiayVang : MonoBehaviour
     float time;
     float timeCanDestroy = 1f;
     private void Update() {
+        if(Camera.main.GetComponent<GameManager>().GetIsPause()) return;
         time += Time.deltaTime;
     }
     private void OnTriggerEnter2D(Collider2D other) {

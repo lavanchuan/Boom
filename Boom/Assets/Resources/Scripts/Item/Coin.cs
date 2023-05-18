@@ -13,6 +13,8 @@ public class Coin : MonoBehaviour
     float time;
     float timeCanDestroy = 1f;
     private void Update() {
+        if(Camera.main.GetComponent<GameManager>().GetIsPause()) return;
+
         time += Time.deltaTime;
     }
 
@@ -32,6 +34,15 @@ public class Coin : MonoBehaviour
             sound.PlaySound(Sound.COIN);
             other.GetComponent<Player>().IncreaseMoney(valueMoney);
             other.GetComponent<Player>().AddItemPickup(name.Split('(')[0].Trim(), 1);
+
+            EffectCoin effectCoin = 
+                FunctionMethod.CreateEffect(EffectCoin.EFFECT_COIN).GetComponent<EffectCoin>();
+            effectCoin.text = "" + valueMoney;
+            effectCoin.transform.localPosition = new Vector2(
+                transform.localPosition.x,
+                transform.localPosition.y + transform.localScale.y/2
+            );
+
             Destroy(gameObject);
         }
 

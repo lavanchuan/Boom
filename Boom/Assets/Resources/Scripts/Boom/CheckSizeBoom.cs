@@ -21,6 +21,8 @@ public class CheckSizeBoom : MonoBehaviour
     }
 
     private void Update() {
+        if(Camera.main.GetComponent<GameManager>().GetIsPause()) return;
+
         if(target == null){Destroy(gameObject); return;}
         float distanceX;
         float distanceY;

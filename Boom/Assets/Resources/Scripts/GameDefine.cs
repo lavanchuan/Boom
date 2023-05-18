@@ -28,7 +28,8 @@ public class GameDefine : MonoBehaviour
     public static readonly string TAG_BLOCK_LIMIT = "Limit";
 
     // TIME PICKUP ITEM OF LAST ROUND
-    public static readonly float TIME_PICKUP_ITEM_OF_ROUND = 10f;
+    public static readonly float TIME_PICKUP_ITEM_OF_ROUND = 30f;
+    public static readonly float TIME_PICKUP_ITEM_OF_ROUND_NORMAL = 5f;
     public static readonly float TIME_LOAD_SCENE = 5f;
 
     // BOSS MAP STRING
@@ -41,5 +42,7 @@ public class GameDefine : MonoBehaviour
     public static readonly string PATH_PREFABS_ITEM_USE = "Prefabs/ItemUse/";
     public static readonly string PATH_PREFABS_COIN = "Prefabs/Coin/";
     
+    // PATH SYSTEM DATA
+    public static readonly string SYSTEM_FILE_NAME = "system.txt";
 
 }

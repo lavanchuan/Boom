@@ -10,6 +10,7 @@ public class RedDemoniacMask : MonoBehaviour
     float time;
     float timeCanDestroy = 1f;
     private void Update() {
+        if(Camera.main.GetComponent<GameManager>().GetIsPause()) return;
         time += Time.deltaTime;
     }
 
@@ -18,6 +19,7 @@ public class RedDemoniacMask : MonoBehaviour
             other.GetComponent<Player>().SetMaxSpeed();
             other.GetComponent<Player>().setCanKickBoom(canKickBoom);
             other.GetComponent<Player>().AddItemPickup(name.Split('(')[0].Trim(), 1);
+            other.GetComponent<Player>().CreateEffect(Effect.EFFECT_USE_FORTIFY);
             Destroy(gameObject);
         }
 

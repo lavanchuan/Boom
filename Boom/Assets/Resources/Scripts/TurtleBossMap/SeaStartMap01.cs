@@ -28,9 +28,11 @@ public class SeaStartMap01 : MonoBehaviour
     }
 
     private void Update() {
+        if(Camera.main.GetComponent<GameManager>().GetIsPause()) return;
+
         if(playing && seaStarts.Count == 0){
             playing = false;
-            StartCoroutine(EffectPickupItem(GameDefine.TIME_PICKUP_ITEM_OF_ROUND));
+            StartCoroutine(EffectPickupItem(GameDefine.TIME_PICKUP_ITEM_OF_ROUND_NORMAL));
         }
     }
 

@@ -7,17 +7,21 @@ public class SeaStartMapBoss : MonoBehaviour
 {
     public GameObject[] seaStarts;
     public GameObject boss;
-    public string[] pathSeaStartList;
-    public Vector2[] posSeaStartList;
-    public float[] timeRegenerateList;
-    public int[] typeDirectList;
+    AttributeTurtle attributeTurtle;
+    string[] pathSeaStartList;
+    Vector2[] posSeaStartList;
+    float[] timeRegenerateList;
+    int[] typeDirectList;
     float timeRegenerate = 5f;
     string PATH_PREFABS_SEA_START = "Prefabs/Boss/";
     public bool playing;
     public bool isWin;
+    bool bossDied;
+    public bool clearSeaStarts;
     string pathSceneLoad = MainMenu.PATH_SCENE_MAINMENU;
     
     private void Start() {
+        attributeTurtle = boss.GetComponent<AttributeTurtle>();
         pathSeaStartList = new string[seaStarts.Length];
         posSeaStartList = new Vector2[seaStarts.Length];
         timeRegenerateList = new float[seaStarts.Length];
@@ -31,7 +35,7 @@ public class SeaStartMapBoss : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if(isWin) return;
+        if(attributeTurtle.dieing) return;
         for(int i = 0; i < seaStarts.Length; i++){
             if(seaStarts[i] == null){
                 timeRegenerateList[i] = timeRegenerateList[i] - Time.deltaTime;
@@ -48,7 +52,10 @@ public class SeaStartMapBoss : MonoBehaviour
     }
 
     private void Update() {
-        if(boss == null){
+        if(Camera.main.GetComponent<GameManager>().GetIsPause()) return;
+
+        if(attributeTurtle.dieing && !clearSeaStarts){
+            ClearSeaStarts();
             StartCoroutine(EffectPickupItem(GameDefine.TIME_PICKUP_ITEM_OF_ROUND));
         }
     }
@@ -56,5 +63,13 @@ public class SeaStartMapBoss : MonoBehaviour
     IEnumerator EffectPickupItem(float effectTime){
         yield return new WaitForSeconds(effectTime);
         StartCoroutine(FunctionMethod.EffectChangeScene(pathSceneLoad, 1f));
+    }
+
+    void ClearSeaStarts(){
+        Debug.Log("CLEAR SEA START");
+        clearSeaStarts = true;
+        foreach(GameObject go in seaStarts){
+            Destroy(go);
+        }
     }
 }

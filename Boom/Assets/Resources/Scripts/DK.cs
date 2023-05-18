@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DK : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class DK : MonoBehaviour
 
     private void Update()
     {
+        if(SceneManager.GetActiveScene().name != "MapChoesScene"
+            && Camera.main.GetComponent<GameManager>().GetIsPause()) return;
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);

@@ -11,6 +11,7 @@ public class Shield : MonoBehaviour
     float time;
     float timeCanDestroy = 1f;
     private void Update() {
+        if(Camera.main.GetComponent<GameManager>().GetIsPause()) return;
         time += Time.deltaTime;
     }
 

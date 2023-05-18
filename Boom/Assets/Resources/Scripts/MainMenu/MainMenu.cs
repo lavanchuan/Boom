@@ -15,10 +15,11 @@ public class MainMenu : MonoBehaviour
     public static readonly string PATH_SCENE_TURTLE_MAP2 = "Scenes/TurtleBoss02";
     public static readonly string PATH_SCENE_TURTLE_MAP3 = "Scenes/TurtleBoss03";
     public static readonly string PATH_SCENE_MAINMENU = "Scenes/MainMenu";
-
-
+    Sound sound;
     void Start()
     {
+        sound = GameObject.FindGameObjectWithTag(Sound.TAG).GetComponent<Sound>();
+
         btnPlay.onClick.AddListener(BtnPlay);
         btnSetting.onClick.AddListener(BtnSetting);
         btnQuit.onClick.AddListener(BtnQuit);

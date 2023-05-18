@@ -10,16 +10,21 @@ public class Bom : MonoBehaviour
     public static string bom1 = "Bom";
     public static string bom2 = "Boom2";
     public int size = 1;
-    public static int MAX_SIZE = 6;
+    public static int MAX_SIZE = 10;
     public string tagEffects;
     public bool onRadar;
+    float radiusColliderDefault;
+    float boxCollider2DSizeDefault;
+    string _name;
 
     // component
     CircleCollider2D circleCollider2D;
+    BoxCollider2D boxCollider2D;
+    Rigidbody2D rigidbody2D;
     
     // Setup when player exit bom
     int speed = 0;
-    int speedDefault = 10;
+    int speedDefault = 15;
     Vector2 currentPos;
     GameDefine.DIRECT direct;
     
@@ -34,11 +39,21 @@ public class Bom : MonoBehaviour
     {
         currentPos = new Vector2(transform.position.x, transform.position.y);
         direct = GameDefine.DIRECT.NONE;
-        circleCollider2D = GetComponent<CircleCollider2D>();
         onRadar = false;
+
+        _name = name.Split(' ')[0].Trim();
     }
 
     private void Start() {
+        circleCollider2D = GetComponent<CircleCollider2D>();
+        if(_name == "Boom2"){
+            boxCollider2D = GetComponent<BoxCollider2D>();
+            boxCollider2DSizeDefault = boxCollider2D.size.x;
+        }
+        rigidbody2D = GetComponent<Rigidbody2D>();
+
+        radiusColliderDefault = circleCollider2D.radius;
+
         sizeLeft = sizeUp = sizeRight = sizeDown = size;
         CheckSizeBoom csbGOL, csbGOR, csbGOD, csbGOU;
         GameObject go1 = (GameObject)Instantiate(Resources.Load(CheckSizeBoom.PATH_PREFABS));
@@ -69,6 +84,8 @@ public class Bom : MonoBehaviour
     }
 
     private void Update() {
+        if(Camera.main.GetComponent<GameManager>().GetIsPause()) return;
+
         // Debug.Log("SIZE:\t" + size);
         // sizeLeft = csbGO.sizeExplosiveTargetLeft;
         // sizeRight = csbGO.sizeExplosiveTargetRight;
@@ -79,6 +96,17 @@ public class Bom : MonoBehaviour
         if(sizeUp == -1) sizeUp = size;
         if(sizeDown == -1) sizeDown = size;
 
+        if(direct == GameDefine.DIRECT.NONE) circleCollider2D.radius = radiusColliderDefault;
+        else circleCollider2D.radius = radiusColliderDefault - 0.2f;
+
+        if(_name == "Boom2"){
+            if(direct == GameDefine.DIRECT.NONE){
+                boxCollider2D.size = new Vector2(boxCollider2DSizeDefault, 
+                    boxCollider2DSizeDefault);
+            }
+            else boxCollider2D.size = new Vector2(boxCollider2DSizeDefault - 0.2f,
+                boxCollider2DSizeDefault - 0.2f);
+        }
 
         currentPos = transform.localPosition; // [update]
 
@@ -126,6 +154,12 @@ public class Bom : MonoBehaviour
         if(other.tag == AttributeSeaStart.TAG){
             other.gameObject.GetComponent<AttributeSeaStart>().UpdateDirect();
         }
+
+        if(other.tag == "Player" && !other.GetComponent<Player>().GetChoked()){
+            if(other.GetComponent<Player>().getCanKickBoom()){
+                rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -147,19 +181,24 @@ public class Bom : MonoBehaviour
             return;
         }
 
-        // with block,...
-        if(other.collider.tag == GameDefine.TAG_BLOCK_MAY_BROKEN 
-            || other.collider.tag == GameDefine.TAG_BLOCK_NOT_BROKEN
-            || other.collider.tag == GameDefine.TAG_BLOCK_LIMIT){
-            this.speed = 0;
-            this.direct = GameDefine.DIRECT.NONE;
-            return;
-        }
-
         // with water damage
         if(other.collider.tag == Damage.TAG){
             ExplosiveBoom();
+            return;
         }
+
+        // with block,... and other
+        // if(other.collider.tag == GameDefine.TAG_BLOCK_MAY_BROKEN 
+        //     || other.collider.tag == GameDefine.TAG_BLOCK_NOT_BROKEN
+        //     || other.collider.tag == GameDefine.TAG_BLOCK_LIMIT){
+        //     this.speed = 0;
+        //     this.direct = GameDefine.DIRECT.NONE;
+        //     return;
+        // }
+        this.speed = 0;
+        this.direct = GameDefine.DIRECT.NONE;
+
+        
     }
 
     // Set timer

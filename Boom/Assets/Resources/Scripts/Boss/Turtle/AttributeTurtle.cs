@@ -19,7 +19,7 @@ public class AttributeTurtle : MonoBehaviour
     int direct;
     bool beingAttacked = false;
     bool attacking = false;
-    bool dieing = false;
+    public bool dieing = false;
     bool prepareAttacking = false;
     bool stopAttacking = false;
     bool choked = false;
@@ -39,6 +39,8 @@ public class AttributeTurtle : MonoBehaviour
     }
 
     private void Update() {
+        if(Camera.main.GetComponent<GameManager>().GetIsPause()) return;
+
         if(!prepareAttacking && !attacking && !stopAttacking && !dieing){
             deltaTimeAttack += Time.deltaTime;
             Move(SPEED_DEFAULT);

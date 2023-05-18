@@ -74,6 +74,8 @@ public class AttributeSeaStart : MonoBehaviour
     }
 
     private void Update() {
+        if(Camera.main.GetComponent<GameManager>().GetIsPause()) return;
+
         UpdateAnimator();
         if(direct == 0 && !regenerate){UpdateDirect();}
         if(!regenerate && !sleep && !breaking && !attacking){Move();}
@@ -134,6 +136,7 @@ public class AttributeSeaStart : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.collider.tag == "WaterDamage" && !sleep && !attacking){
             SleepState();
+            return;
         }
 
         if(other.collider.tag == AttributeSeaStart.TAG){
@@ -146,6 +149,7 @@ public class AttributeSeaStart : MonoBehaviour
             } else if(!sleep){
                 UpdateDirect();
             }
+            return;
         }
 
         if(other.collider.tag == "Player" && !other.collider.GetComponent<Player>().GetChoked()){
@@ -157,19 +161,21 @@ public class AttributeSeaStart : MonoBehaviour
             } else if(!sleep && !attacking && !player.GetShieldUsing()){
                 player.PlayerDie();
             }
-            
+            return;
         }
 
-        if(other.collider.tag == GameDefine.TAG_BLOCK_LIMIT 
-            || other.collider.tag == GameDefine.TAG_BLOCK_MAY_BROKEN
-            || other.collider.tag == GameDefine.TAG_BLOCK_NOT_BROKEN){
-            if(attacking){
-                StartCoroutine(EffectBroken());
-            } else if(!sleep){
-                UpdateDirect();
-            }
-        }
-
+        // breaking when collison with block and other
+        // if(other.collider.tag == GameDefine.TAG_BLOCK_LIMIT 
+        //     || other.collider.tag == GameDefine.TAG_BLOCK_MAY_BROKEN
+        //     || other.collider.tag == GameDefine.TAG_BLOCK_NOT_BROKEN){
+        //     if(attacking){
+        //         StartCoroutine(EffectBroken());
+        //     } else if(!sleep){
+        //         UpdateDirect();
+        //     }
+        // }
+        if(attacking) StartCoroutine(EffectBroken());
+        else if(!sleep) UpdateDirect();
         // Attack turtle => (turtle)
     }
 

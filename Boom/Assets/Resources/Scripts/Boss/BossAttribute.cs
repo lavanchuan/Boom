@@ -16,15 +16,16 @@ public class BossAttribute : MonoBehaviour
     private const float SPEED_MAX = 2f;
     float speedIncrease = 0.05f;
     private ArrayList items;
-    const int HEALTH_BOSS_1 = 20;
-    const int HEALTH_BOSS_TURTLE = 100;
-    float deltaTimeAttack = 10f;
+    const int HEALTH_BOSS_1 = 50;
+    float deltaTimeAttack = 20f;
     float minDeltaTimeAttack = 3f;
     float deltatimeIncrease = 0.2f;
     int boomQuantity;
     string boomName;
     int boomSize;
     bool attacked;
+    // DIEING
+    public bool dieing;
 
     // 
     float deltaTimeUpdateDirect; // seconds
@@ -144,6 +145,8 @@ public class BossAttribute : MonoBehaviour
     }
 
     private void Update() {
+        if(Camera.main.GetComponent<GameManager>().GetIsPause()) return;
+
         if(tag == "Boss1") UpdateAnimator();
         if(tag == AttributeTurtle.TAG){
             animator.SetInteger("Health", (int)healthCurrent);
@@ -184,6 +187,7 @@ public class BossAttribute : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
+        if(dieing) return;
         if(other.collider.tag == "Player" && 
             !other.collider.GetComponent<Player>().GetShieldUsing()
             && healthCurrent > 0){
@@ -193,6 +197,7 @@ public class BossAttribute : MonoBehaviour
 
     // Trigger
     private void OnTriggerEnter2D(Collider2D other) {
+        if(dieing) return;
         // Player
         if(other.tag == "Player" && !other.GetComponent<Player>().GetShieldUsing()){
             if(tag == AttributeTurtle.TAG && healthCurrent > 0)
@@ -230,6 +235,7 @@ public class BossAttribute : MonoBehaviour
     }
 
     IEnumerator EffectDie(float effectTime){
+        dieing = true;
         yield return new WaitForSeconds(effectTime);
         Destroy(gameObject);
     }
@@ -237,6 +243,7 @@ public class BossAttribute : MonoBehaviour
     // Set Direct
     public void SetDirect(int direct){this.direct = direct;}
     public float GetHealthCurrent(){return this.healthCurrent;}
+    public float GetHealthMax(){return this.health;}
 
 }
 

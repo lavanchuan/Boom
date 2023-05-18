@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     bool usingSuperShield;
     // Component
     Animator animator;
+    Rigidbody2D rigidbody2D;
     // Boom
     GameObject boom;
     GameObject timeBomb;
@@ -47,19 +48,14 @@ public class Player : MonoBehaviour
     ArrayList itemsQuantity;
     // Other game object
     Sound sound;
+    public GameObject dieGameObject;
     // Constructor
     private void Awake() {
+        // InitDefault();
+
         animator = GetComponent<Animator>();
-        this.choked = false;
         this.timeLiveInWater = TIME_LIVE_IN_WATER_DEFAULT;
-        boomName = Bom.bom1;
-        speed = SPEED_DEFAULT;
-        putTimeBomb = false;
-        timeBomb = null;
-        damageByBoom = 4f;
-        this.lastSpeed = this.speed;
-        this.lastBoomQuantity = this.boomQuantity;
-        this.lastSizeBoom = this.sizeBoom;
+        
         // Statistic items pickuped
         itemsPickuped = new ArrayList();
         itemsQuantity = new ArrayList();
@@ -68,16 +64,27 @@ public class Player : MonoBehaviour
     public void InitDefault(){
         sizeBoom = 1;
         boomQuantity = 1;
-        
+        needleQuantity = 0;
+        this.choked = false;
+        speed = SPEED_DEFAULT;
+        putTimeBomb = false;
+        timeBomb = null;
+        damageByBoom = 4f;
+        boomName = Bom.bom1;
+        this.lastSpeed = this.speed;
+        this.lastBoomQuantity = this.boomQuantity;
+        this.lastSizeBoom = this.sizeBoom;
     }
 
     private void Start() {
         animator = GetComponent<Animator>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
         sound = GameObject.FindGameObjectWithTag(Sound.TAG).GetComponent<Sound>();
         InitDefault();
     }
 
     private void Update() {
+        if(Camera.main.GetComponent<GameManager>().GetIsPause()) return;
         animator.SetBool("Choked", choked);
         // animator.SetBool("isVisible", isVisible);
         // animator.SetBool("UsingShield", shieldUsing);
@@ -152,6 +159,14 @@ public class Player : MonoBehaviour
     // Boom Item
     public void IncreaseBoomItem(int quantity){
         this.boomQuantity += quantity;
+        if(this.boomQuantity >= MAX_BOOM_QUANTITY){
+            this.boomQuantity = MAX_BOOM_QUANTITY;
+        }
+
+        this.lastBoomQuantity += quantity;
+        if(this.lastBoomQuantity >= MAX_BOOM_QUANTITY){
+            this.lastBoomQuantity = MAX_BOOM_QUANTITY;
+        }
     }
     public void PutBoom()
     {
@@ -236,6 +251,7 @@ public class Player : MonoBehaviour
     }
     // State Choke water
     public void StateChoke(int speed){
+        rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
         this.lastSpeed = this.speed;
         this.speed = speed;
         this.isVisible = false; // Stop visible -- Bị phát hiện và dừng tàng hình
@@ -250,6 +266,8 @@ public class Player : MonoBehaviour
     public void RecoverAfterChoke(){
         this.choked = false;
         this.speed = lastSpeed;
+        rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+        CreateEffect(Effect.EFFECT_USE_NEEDLE);
     }
     // Needle
     public void IncreaseNeedleQuantity(int quantity){
@@ -458,6 +476,7 @@ public class Player : MonoBehaviour
     public void PlayerDie(){
         sound.PlaySound(Sound.PLAYER_DIE);
         DropItemsPickuped();
+        dieGameObject.GetComponent<DieGameObject>().hiddenDieUI = false;
         Destroy(gameObject);
     }
 
@@ -511,6 +530,13 @@ public class Player : MonoBehaviour
             }
         }
 
+    }
+
+    // CREATE EFFECT
+    public void CreateEffect(string effectName){
+        Effect effect = 
+            FunctionMethod.CreateEffect(effectName).GetComponent<Effect>();
+        effect.owner = gameObject;
     }
 
 }
