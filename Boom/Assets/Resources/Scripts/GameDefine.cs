@@ -44,5 +44,8 @@ public class GameDefine : MonoBehaviour
     
     // PATH SYSTEM DATA
     public static readonly string SYSTEM_FILE_NAME = "system.txt";
+    public static readonly string ACCOUNT_PLAYER_FILE = "account.txt";
+    public static readonly string LOGIN_STATE_FILE = "login_state.txt";
+    public static readonly string PALYER_COIN_FILE = "player_coin.txt";
 
 }

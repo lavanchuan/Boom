@@ -26,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/QueenBoss01.unity
     guid: 45a4fa4ac1e49854ca1b9628d4a9feba
+  - enabled: 1
+    path: Assets/Scenes/Login.unity
+    guid: 4d68c5e1083860b41993172f30d9b75c
+  - enabled: 1
+    path: Assets/Scenes/HeightCoin.unity
+    guid: 696991c8b55db46418e3892ac1b3cc66
   m_configObjects: {}

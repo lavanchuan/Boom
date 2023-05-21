@@ -5428,6 +5428,7 @@ GameObject:
   - component: {fileID: 8018004575432348793}
   - component: {fileID: 8018004575432348799}
   - component: {fileID: 8018004575432348798}
+  - component: {fileID: 1974145542467123528}
   m_Layer: 0
   m_Name: Stump (4)
   m_TagString: BlockNotBroken
@@ -20258,3 +20259,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88dcafe47ad080c4eacb85c033121c17, type: 3}
+--- !u!50 &1974145542467123528
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8018004575432348792}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

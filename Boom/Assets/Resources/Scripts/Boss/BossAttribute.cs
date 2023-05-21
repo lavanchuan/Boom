@@ -237,6 +237,7 @@ public class BossAttribute : MonoBehaviour
     IEnumerator EffectDie(float effectTime){
         dieing = true;
         yield return new WaitForSeconds(effectTime);
+        GetComponent<MayDropItemBoss>().DropItems();
         Destroy(gameObject);
     }
 

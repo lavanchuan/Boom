@@ -38,12 +38,14 @@
   <ItemGroup>
      <Compile Include="Assets\Resources\Scripts\Boss\BossAttribute.cs" />
      <Compile Include="Assets\Resources\Scripts\Boss\Boss1\Boss1.cs" />
+     <Compile Include="Assets\Resources\Scripts\Effect\EffectCoin.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\ItemSetup\ItemObjectList.cs" />
      <Compile Include="Assets\Resources\Scripts\Joystick.cs" />
      <Compile Include="Assets\Resources\Scripts\MainMenu\TurtleMap.cs" />
      <Compile Include="Assets\Resources\Scripts\DatBom.cs" />
      <Compile Include="Assets\Resources\Scripts\Audio\Music.cs" />
      <Compile Include="Assets\Resources\Scripts\PlayTime\PlayTime.cs" />
+     <Compile Include="Assets\Resources\Scripts\Effect\Effect.cs" />
      <Compile Include="Assets\Resources\Scripts\Boom.cs" />
      <Compile Include="Assets\Resources\Scripts\Boss\HealthBarBoss.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\ItemSetup\RateItemObject.cs" />
@@ -79,6 +81,7 @@
      <Compile Include="Assets\Resources\Scripts\Supply\Supply.cs" />
      <Compile Include="Assets\Resources\Scripts\Block\Block.cs" />
      <Compile Include="Assets\Resources\Scripts\DK.cs" />
+     <Compile Include="Assets\Resources\Scripts\Login\LoginAndRegister.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\GiayDo.cs" />
      <Compile Include="Assets\Resources\Scripts\MainMenu\TurtleBossMap.cs" />
      <Compile Include="Assets\Resources\Scripts\TurtleBossMap\SeaStartMapBoss.cs" />
@@ -103,8 +106,10 @@
      <Compile Include="Assets\Resources\Scripts\Player\Player.cs" />
      <Compile Include="Assets\Resources\Scripts\Boom\CheckSizeBoom.cs" />
      <Compile Include="Assets\Resources\Scripts\Item\GiayXanh.cs" />
-     <Compile Include="Assets\Resources\Scripts\Effect\Effect.cs" />
-     <Compile Include="Assets\Resources\Scripts\Effect\EffectCoin.cs" />
+     <Compile Include="Assets\Resources\Scripts\Models\Account.cs" />
+     <Compile Include="Assets\Resources\Scripts\Models\PlayerCoin.cs" />
+     <Compile Include="Assets\Resources\Scripts\MainMenu\HeightCoin.cs" />
+     <Compile Include="Assets\Resources\Scripts\MainMenu\BtnLogin.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Unity\Hud\Editor\2020.3.45f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

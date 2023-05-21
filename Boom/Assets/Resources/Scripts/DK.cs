@@ -9,8 +9,8 @@ public class DK : MonoBehaviour
 
     private void Update()
     {
-        if(SceneManager.GetActiveScene().name != "MapChoesScene"
-            && Camera.main.GetComponent<GameManager>().GetIsPause()) return;
+        // if(SceneManager.GetActiveScene().name != "MapChoesScene"
+        //     && Camera.main.GetComponent<GameManager>().GetIsPause()) return;
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);

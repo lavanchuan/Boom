@@ -49,6 +49,8 @@ public class SeaStartMap01 : MonoBehaviour
         isWin = true;
         gameManager.playing = playing;
         gameManager.isWin = isWin;
+        FunctionMethod.UpdatePlayerCoin(FunctionMethod.GetUsernameLoged(), 
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().money);
         StartCoroutine(FunctionMethod.EffectChangeScene(pathSceneLoad, 1f));
     }
 }

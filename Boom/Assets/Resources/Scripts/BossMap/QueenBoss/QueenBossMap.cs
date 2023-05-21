@@ -22,6 +22,8 @@ public class QueenBossMap : MonoBehaviour
     }
 
     IEnumerator EffectPickupItem(float effectTime){
+        FunctionMethod.UpdatePlayerCoin(FunctionMethod.GetUsernameLoged(), 
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().money);
         yield return new WaitForSeconds(effectTime);
         StartCoroutine(FunctionMethod.EffectChangeScene(pathSceneLoad, 1f));
     }

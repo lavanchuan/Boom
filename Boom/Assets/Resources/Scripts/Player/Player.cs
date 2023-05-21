@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     int timeBombQuantity = 0;
     bool putTimeBomb;
     int shieldQuantity = 0;
-    int money;
+    public int money;
     float damageByBoom;
     // Statistic items pickup
     ArrayList itemsPickuped; // string : name item
